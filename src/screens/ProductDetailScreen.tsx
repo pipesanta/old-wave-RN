@@ -8,6 +8,8 @@ interface Props extends StackScreenProps<ProductsStackParams, 'ProductDetailScre
 
 export const ProductDetailScreen = ({ route }: Props) => {
 
+    
+
     const { id } = route.params;
     return (
         <View style={ styles.container }>
