@@ -1,6 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ProductsStackParams } from '../navigator/ProductsNavigator'
 
 interface Props extends StackScreenProps<ProductsStackParams, 'SearchScreen'>{};
@@ -18,8 +19,11 @@ export const SearchScreen = ({ navigation }: Props) => {
         }
     ]
 
+    //Esto lo pongo para proteger cuando hay celulares con Notch (Como el mío, de Guti)
+    const { top }= useSafeAreaInsets();
+
     return (
-        <View style={{ flex: 1, marginHorizontal: 20, marginVertical:20 }}>
+        <View style={{ flex: 1, top: top}}>
             {/* <Text>Search Screenss</Text> */}
             <FlatList
                 data={products}
@@ -45,6 +49,6 @@ export const SearchScreen = ({ navigation }: Props) => {
 
 const styles = StyleSheet.create({
     itemSeparator:{
-        marginVertical: 15
+        marginVertical: 0
     }
 });
