@@ -1,45 +1,39 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import React from 'react'
+import React, { useContext } from 'react'
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SearchInput } from '../components/SearchInput'
+import { ProductsContext } from '../context/ProductsContext'
 import { ProductsStackParams } from '../navigator/ProductsNavigator'
 
-interface Props extends StackScreenProps<ProductsStackParams, 'SearchScreen'>{};
+interface Props extends StackScreenProps<ProductsStackParams, 'SearchScreen'> { };
 
 export const SearchScreen = ({ navigation }: Props) => {
 
-    const products = [
-        {
-            "id": "1",
-            "name": "Celular"
-        },
-        {
-            "id": "2",
-            "name": "Tennis"
-        }
-    ]
+    const { products, loadProducts } = useContext(ProductsContext);
 
     //Esto lo pongo para proteger cuando hay celulares con Notch (Como el mío, de Guti)
-    const { top }= useSafeAreaInsets();
+    const { top } = useSafeAreaInsets();
+
 
     return (
-        <View style={{ flex: 1, top: top}}>
+        <View style={{ flex: 1, top: top }}>
+            <SearchInput onValueChanges={loadProducts} />
+
             {/* <Text>Search Screenss</Text> */}
             <FlatList
                 data={products}
                 keyExtractor={(p) => p.id}
-                renderItem={ ({item}) => (
+                renderItem={({ item }) => (
                     <TouchableOpacity
-                        onPress={ () => navigation.navigate('ProductDetailScreen', {
+                        onPress={() => navigation.navigate('ProductDetailScreen', {
                             id: item.id
-                        }) }
+                        })}
                     >
-                        <Text>{ item.name }</Text>
+                        <Text>{item.nombre}</Text>
                     </TouchableOpacity>
-                    
                 )}
-
-                ItemSeparatorComponent={ () => (
+                ItemSeparatorComponent={() => (
                     <View style={styles.itemSeparator} />
                 )}
             />
@@ -48,7 +42,7 @@ export const SearchScreen = ({ navigation }: Props) => {
 }
 
 const styles = StyleSheet.create({
-    itemSeparator:{
+    itemSeparator: {
         marginVertical: 0
     }
 });
