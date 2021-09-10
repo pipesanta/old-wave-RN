@@ -3,6 +3,8 @@ import React from 'react';
 import { ProductDetailScreen } from '../screens/ProductDetailScreen';
 import { SearchScreen } from '../screens/SearchScreen';
 import { ProductsNavigator } from './ProductsNavigator';
+import { ListProductNavigator } from './ListProductNavigator';
+import { Text } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +18,9 @@ export const Navigator = () => {
             }
         }}
     >
-      <Stack.Screen name="ProductsNavigator" component={ProductsNavigator} />
+       {/* <Stack.Screen name="ProductsNavigator" component={ProductsNavigator} />  */}
+      <Stack.Screen name="ListProductNavigator" component={ListProductNavigator} />
+     
     </Stack.Navigator>
   );
 }

@@ -1,8 +1,10 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import React from 'react'
 import { Image, StyleSheet, Text, View, ActivityIndicator } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useProductDetail } from '../hooks/useProductDetail';
+import React, { useContext, useEffect, useState } from 'react'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { ProductsContext } from '../context/ProductsContext'
+import { Product } from '../interfaces/appInterfaces'
 import { ProductsStackParams } from '../navigator/ProductsNavigator'
 import { ProductDetail } from '../components/product-detail/ProductDetail';
 
@@ -15,6 +17,35 @@ export const ProductDetailScreen = ({ route }: Props) => {
     const { id } = route.params;
 
     const { isLoading, productFull } = useProductDetail(1);
+
+    const { loadProductById } = useContext( ProductsContext );
+
+    const [product, setproduct] = useState<Product>({
+        id:          '',
+        nombre:      '',
+        marca:       '',
+        urlFoto:     '',
+        ciudad:      '',
+        precio:      NaN,
+        seller:      '',
+        rating:      NaN,
+        urlFotos:    ['',''],
+        reseller:    {
+            nombre: '',
+            urlLogo: ''
+        },
+        descripcion: ''
+    })
+
+    // useEffect(() => {
+    //     loadProduct();
+    // }, [])
+
+    // const loadProduct = async() => {
+    //     if ( id.length === 0 ) return;
+    //     const product = await loadProductById( id );
+    //     setproduct(product);   
+    // }
     return (
         <>
             
