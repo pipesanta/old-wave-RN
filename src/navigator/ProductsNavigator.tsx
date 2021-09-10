@@ -5,7 +5,9 @@ import { ProductDetailScreen } from '../screens/ProductDetailScreen';
 
 export type ProductsStackParams = {
     SearchScreen: undefined,
-    ProductDetailScreen: { id: string }
+    ProductDetailScreen: {
+        id: string
+    }
 }
 
 
@@ -14,22 +16,22 @@ const Stack = createStackNavigator<ProductsStackParams>();
 export const ProductsNavigator = () => {
     return (
         <Stack.Navigator
-        screenOptions={{
-            headerShown: false,
-            cardStyle: {
-                backgroundColor: 'white'
-            }
-        }}
+            screenOptions={{
+                headerShown: false,
+                cardStyle: {
+                    backgroundColor: 'white'
+                }
+            }}
         >
 
-            <Stack.Screen 
+            <Stack.Screen
                 name="SearchScreen"
-                component={ SearchScreen }
+                component={SearchScreen}
             />
 
-            <Stack.Screen 
+            <Stack.Screen
                 name="ProductDetailScreen"
-                component={ ProductDetailScreen }
+                component={ProductDetailScreen}
             />
         </Stack.Navigator>
     )
