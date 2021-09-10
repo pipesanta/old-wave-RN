@@ -5,7 +5,6 @@ import { ListProductsStackParams} from '../navigator/ListProductNavigator';
 import { FlatList } from 'react-native-gesture-handler';
 import {ProductDetailScreen} from '../screens/ProductDetailScreen';
 import { ProductCard } from '../components/ProductCard';
-import {useFonts, Poppins_500Medium} from '@expo-google-fonts/poppins';
 
 
 interface Props extends StackScreenProps<ListProductsStackParams, 'ListProductScreen'>{};
