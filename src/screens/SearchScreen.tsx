@@ -4,7 +4,8 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ProductCard } from '../components/ProductCard'
 import { SearchInput } from '../components/SearchInput'
-import { ProductsContext } from '../context/ProductsContext'
+import { ProductsContext } from '../context/ProductsContext';
+import { ShoppingCartContext } from '../context/CartContext';
 import { ProductsStackParams } from '../navigator/ProductsNavigator'
 
 interface Props extends StackScreenProps<ProductsStackParams, 'SearchScreen'> { };
@@ -12,6 +13,11 @@ interface Props extends StackScreenProps<ProductsStackParams, 'SearchScreen'> { 
 export const SearchScreen = ({ navigation }: Props) => {
 
     const { products, loadProducts } = useContext(ProductsContext);
+    const {
+        productList,
+        totalPrice,
+        loadProducts: loadProductsForShoppingCart
+    } = useContext(ShoppingCartContext);
 
     //Esto lo pongo para proteger cuando hay celulares con Notch (Como el mío, de Guti)
     const { top } = useSafeAreaInsets();
@@ -24,7 +30,7 @@ export const SearchScreen = ({ navigation }: Props) => {
         <View style={{ flex: 1, top: top }}>
             <SearchInput onValueChanges={loadProducts} />
 
-            {/* <Text>Search Screenss</Text> */}
+            <Text>{totalPrice}</Text>
             <View style={{
                 ...styles.globalMargin,
                 alignItems: 'center'
