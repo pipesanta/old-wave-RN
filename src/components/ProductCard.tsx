@@ -8,34 +8,56 @@ const windowWidth = Dimensions.get('window').width;
 interface Props {
     product: SimpleProduct,
     onClick: (id: string) => void;
+    onAddToCart?: () => void;
+    onDeleteFromCart?: () => void;
 }
 
-export const ProductCard = ({ product, onClick }: Props) => {
+export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }: Props) => {
 
 
     return (
-        <TouchableOpacity
-            onPress={onClick.bind(this, product.id)}
-            activeOpacity={0.9}>
-            <View style={{ ...styles.cardContainter }}>
+        <View>
+            <TouchableOpacity
+                onPress={onClick.bind(this, product.id)}
+                activeOpacity={0.9}>
+                <View style={{ ...styles.cardContainter }}>
 
-                <View>
-                    <Image
-                        source={{ uri: product.urlFoto }}
-                        style={styles.image}
-                    />
+                    <View>
+                        <Image
+                            source={{ uri: product.urlFoto }}
+                            style={styles.image}
+                        />
+                    </View>
+                    <View style={{ width: 100 }} >
+
+                        <Text style={styles.name}> {product.nombre} </Text>
+                        {/* <Text style={styles.brand}> {'\n' + product.marca}</Text> */}
+                        <Text style={styles.price}> {'\n' + product.precio}</Text>
+
+
+                    </View>
+
+
                 </View>
-                <View style={{ width: 100 }} >
 
-                    <Text style={styles.name}> {product.nombre} </Text>
-                    {/* <Text style={styles.brand}> {'\n' + product.marca}</Text> */}
-                    <Text style={styles.price}> {'\n' + product.precio}</Text>
-                </View>
+            </TouchableOpacity>
 
+            <View >
+
+                <TouchableOpacity onPress={onAddToCart}>
+                    <Text style={{ fontSize: 14, backgroundColor: 'blue' }}> AÑADIR </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={onDeleteFromCart}>
+                    <Text style={{ fontSize: 14, backgroundColor: 'red' }}> ELIMINAR </Text>
+                </TouchableOpacity>
 
             </View>
 
-        </TouchableOpacity>
+
+        </View>
+
+
     )
 }
 

@@ -19,4 +19,15 @@ export interface Reseller {
     urlLogo: string;
 }
 
-
+export interface ShoppingCartProductItem {
+    id: string;
+    name: string;
+    unitPrice: number;
+}
+export interface ShoppingCartItem {
+    quantity: number,
+    price: number,
+    selected: boolean,
+    // TODO to defines
+    item: ShoppingCartProductItem
+}

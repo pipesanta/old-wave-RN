@@ -5,13 +5,15 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { Navigator } from './src/navigator/Navigator';
 import { ProductsProvider } from './src/context/ProductsContext';
-
+import { ShoppingCartProvider } from './src/context/CartContext';
 
 
 const AppState = ({ children }: any) => {
-  return(
+  return (
     <ProductsProvider>
-      { children }
+      <ShoppingCartProvider>
+        {children}
+      </ShoppingCartProvider>
     </ProductsProvider>
   )
 }
@@ -20,7 +22,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <AppState>
-        <Navigator/>
+        <Navigator />
       </AppState>
     </NavigationContainer>
   )
