@@ -7,7 +7,8 @@ import { SearchInput } from '../components/SearchInput'
 import { ProductsContext } from '../context/ProductsContext';
 import { ShoppingCartContext } from '../context/CartContext';
 import { ProductsStackParams } from '../navigator/ProductsNavigator'
-import { SimpleProduct } from '../interfaces/productInterfaces'
+import { SimpleProduct } from '../interfaces/productInterfaces';
+import {Header} from '../components/Header';
 
 interface Props extends StackScreenProps<ProductsStackParams, 'SearchScreen'> { };
 
@@ -49,9 +50,10 @@ export const SearchScreen = ({ navigation }: Props) => {
 
     return (
         <View style={{ flex: 1, top: top }}>
+            <Header/>
             <SearchInput onValueChanges={loadProducts} />
-
-            <TouchableOpacity
+            
+            <TouchableOpacity style={{top: 50}}
                 onPress={goToShoppingCart}>
                 <Text style={{ fontSize: 14, backgroundColor: 'blue' }}> IR AL CARRO </Text>
             </TouchableOpacity>
@@ -69,7 +71,7 @@ export const SearchScreen = ({ navigation }: Props) => {
                         <Text style={{
                             ...styles.text,
                             ...styles.globalMargin,
-                            top: 10,
+                            top: 30,
                         }}> Lista productos </Text>
                     )}
                     renderItem={({ item }) => (
