@@ -9,46 +9,63 @@ const windowWidth = Dimensions.get('window').width;
 interface Props {
     product: SimpleProduct,
     onClick: (id: string) => void;
+    onAddToCart?: () => void;
+    onDeleteFromCart?: () => void;
 }
 
-export const ProductCard = ({ product, onClick }: Props) => {
+export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }: Props) => {
 
 
     return (
-        <TouchableOpacity
-            onPress={onClick.bind(this, product.id)}
-            activeOpacity={0.9}
-            style={{ backgroundColor: 'white' }}>
-            <View style={{
-                ...styles.cardContainer,
-                width: windowWidth * 0.4,
-            }}>
-                <View style={styles.cardContent}>
-                    <View style={styles.imageContainer}>
-                        <Image
-                            source={{ uri: 'https://http2.mlstatic.com/D_684803-MLA44155935502_112020-O.jpg' }}
-                            style={styles.image}
-                            resizeMode='contain'
-                        />
-                    </View>
-                    <View style={styles.detailContainer}>
+        <View>
 
-                        <View style={styles.detailContent} >
-
-                            <Text style={styles.name}> {product.nombre} </Text>
-                            <Text style={styles.priceAndBrand}> Apple </Text>
-                            <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.precio, { code: 'COP', precision: 0 })}</Text>
+            <TouchableOpacity
+                onPress={onClick.bind(this, product.id)}
+                activeOpacity={0.9}
+                style={{ backgroundColor: 'white' }}>
+                <View style={{
+                    ...styles.cardContainer,
+                    width: windowWidth * 0.4,
+                }}>
+                    <View style={styles.cardContent}>
+                        <View style={styles.imageContainer}>
+                            <Image
+                                source={{ uri: 'https://http2.mlstatic.com/D_684803-MLA44155935502_112020-O.jpg' }}
+                                style={styles.image}
+                                resizeMode='contain'
+                            />
                         </View>
-                        <TouchableOpacity style={styles.addCartButton}>
-                            <Text style={styles.textBuyButton}>
-                                Agregar al carrito
+                        <View style={styles.detailContainer}>
+
+                            <View style={styles.detailContent} >
+
+                                <Text style={styles.name}> {product.nombre} </Text>
+                                <Text style={styles.priceAndBrand}> Apple </Text>
+                                <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.precio, { code: 'COP', precision: 0 })}</Text>
+                            </View>
+                            <TouchableOpacity style={styles.addCartButton}>
+                                <Text style={styles.textBuyButton}>
+                                    Agregar al carrito
                             </Text>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
-            </View>
 
-        </TouchableOpacity>
+
+            </TouchableOpacity>
+            <View >
+                <TouchableOpacity onPress={onAddToCart}>
+                    <Text style={{ fontSize: 14, backgroundColor: 'blue' }}> AÑADIR </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={onDeleteFromCart}>
+                    <Text style={{ fontSize: 14, backgroundColor: 'red' }}> ELIMINAR </Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+
+
     )
 }
 
