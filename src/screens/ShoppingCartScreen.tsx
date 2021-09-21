@@ -6,7 +6,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { ProductsStackParams } from '../navigator/ProductsNavigator';
 import { ShoppingCartContext } from '../context/CartContext';
 import {Header} from '../components/Header';
-import {ShoppingCard} from '../components/ShoppingCard';
+import { ShoppingCard } from '../components/ShoppingCard';
 import { ShoppingCartProductItem } from '../interfaces/appInterfaces';
 import {ProductCard } from '../components/ProductCard';
 
@@ -30,12 +30,14 @@ export const ShoppingCartScreen = ({ route }: Props) => {
         {
             "id": "1",
             "name": "Iphone 11",
-            "unitPrice": 2000000
+            "unitPrice": 2000000, 
+           
         }, 
         {
             "id": "2",
-            "name": "Iphone 11",
-            "unitPrice": 2000000
+            "name": "Iphone 10",
+            "unitPrice": 2200000, 
+           
         }
     ]
 
@@ -49,19 +51,16 @@ export const ShoppingCartScreen = ({ route }: Props) => {
                     ListHeaderComponent={(
                         <Text style={{
                             ...styles.shoppingCart,
-                            ...styles.globalMargin,
-                            top: 30,
+                            ...styles.globalMargin
                         }}> Shopping cart </Text>
                     )}
                     renderItem={({ item }) => (
-                        <ShoppingCard
-                            product={item} 
-                        />
+                        <ShoppingCard product={item}/>
                     )}
                     ItemSeparatorComponent={() => (
                         <View style={styles.globalMargin} />
                     )}
-                /> 
+                />  
             {/* <Text> {JSON.stringify(productList)} </Text> */}
           
         </View>
@@ -78,7 +77,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: "center",
-        paddingTop: 10
+        paddingTop: 10, 
+
     }, 
     globalMargin:{
         marginVertical: 30
