@@ -22,7 +22,7 @@ export const ProductDetailScreen = ({ route }: Props) => {
             {
                 isLoading
                     ? <ActivityIndicator size={35} color="grey" style={{ marginTop: 20 }} />
-                    : <ProductDetail productFull={productDetail!} />
+                    : <ProductDetail productFull={productDetail!}/>
             }
         </>
     )

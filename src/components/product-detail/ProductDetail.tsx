@@ -7,18 +7,26 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements'
 import { ItemDetail } from './ItemDetail'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ShoppingCartScreen } from '../../screens/ShoppingCartScreen';
+import { SimpleProduct } from '../../interfaces/productInterfaces';
+
 
 const screenHeight = Dimensions.get('screen').height;
 const screenWidth = Dimensions.get('screen').width;
 
 interface Props {
     productFull: any;
+  
 }
 
-export const ProductDetail = ({ productFull }: Props) => {
+
+export const ProductDetail = ({ productFull}: Props) => {
     const {top} = useSafeAreaInsets();
     const navigation = useNavigation();
     const [activeSlide, setActiveSlide] = useState(0);
+
+
+
     return (
         <>            
             <ScrollView>
@@ -67,12 +75,12 @@ export const ProductDetail = ({ productFull }: Props) => {
                     </Text>
                 </View>
                 <View style={ styles.actionsContainer}>
-                    <TouchableOpacity style={styles.buyButton}>
+                    <TouchableOpacity style={styles.buyButton} >
                         <Text style={styles.textBuyButton}>
                             COMPRAR
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.addCardButton}>
+                    <TouchableOpacity style={styles.addCardButton} >
                         <Icon name='cart-outline' type='ionicon' color='#fff' size={25} />
                     </TouchableOpacity>
 

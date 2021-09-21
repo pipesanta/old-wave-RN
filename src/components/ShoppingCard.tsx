@@ -1,27 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SimpleProduct } from '../interfaces/productInterfaces';
+import {View, Text, TouchableOpacity, StyleSheet, Image, Dimensions} from 'react-native';
+import {ShoppingCartItem, ShoppingCartProductItem} from '../interfaces/appInterfaces';
 import currencyFormatter from 'currency-formatter';
 
 const windowWidth = Dimensions.get('window').width;
 
-interface Props {
-    product: SimpleProduct,
-    onClick: (id: string) => void;
-    onAddToCart?: () => void;
-    onDeleteFromCart?: () => void;
+interface Props{
+    // ShoppingCartProductItem: any, 
+    // ShoppingCartItem: any, 
+    product: ShoppingCartProductItem, 
+    // products: ShoppingCartItem
 }
 
-export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }: Props) => {
-
-
-    return (
-        <View>
-
-            <TouchableOpacity
-                onPress={onClick.bind(this, product.id)}
-                activeOpacity={0.9}
+export const ShoppingCard = ({  product}: Props) =>{
+    return(
+       <View>
+        <TouchableOpacity
                 style={{ backgroundColor: 'white' }}>
                 <View style={{
                     ...styles.cardContainer,
@@ -39,34 +33,30 @@ export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }:
 
                             <View style={styles.detailContent} >
 
-                                <Text style={styles.name}> {product.nombre} </Text>
+                                <Text style={styles.name}> {product.name} </Text>
                                 <Text style={styles.priceAndBrand}> Apple </Text>
-                                <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.precio, { code: 'COP', precision: 0 })}</Text>
+                                <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.unitPrice, { code: 'COP', precision: 0 })}</Text>
                             </View>
-                            <TouchableOpacity style={styles.addCartButton} >
-                                <Text style={styles.textBuyButton}>
-                                    Agregar al carrito
-                            </Text>
+                        <View style={styles.cardQuantity}>
+                            <Text>Cantidad: </Text>
+                            <TouchableOpacity style={styles.quantity} 
+                                //  onPress= { () => setQuantity( quantity + 1 )}
+                            ><Text style={styles.textQuantityButton}> + </Text>
                             </TouchableOpacity>
+                            <Text style={styles.numberQuantity}>{product.id}</Text>
+                            <TouchableOpacity style={styles.quantity} 
+                                //  onPress= { () => setQuantity( quantity - 1 )}
+                            ><Text style={styles.textQuantityButton}> - </Text>
+                            </TouchableOpacity>
+                        </View>
+                            
                         </View>
                     </View>
                 </View>
-
-
             </TouchableOpacity>
-            <View >
-                <TouchableOpacity onPress={onAddToCart}>
-                    <Text style={{ fontSize: 14, backgroundColor: 'blue' }}> AÑADIR </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={onDeleteFromCart}>
-                    <Text style={{ fontSize: 14, backgroundColor: 'red' }}> ELIMINAR </Text>
-                </TouchableOpacity>
-            </View>
         </View>
-
-
     )
+
 }
 
 const styles = StyleSheet.create({
@@ -79,6 +69,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowRadius: 7,
         elevation: 1,
+        top: 50,
 
         shadowOffset: {
             width: 0,
@@ -132,8 +123,8 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        width: '100%',
-        height: '100%',
+        width: '80',
+        height: '80',
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         flex: 1
@@ -144,21 +135,32 @@ const styles = StyleSheet.create({
         color: '#772CE8',
         textAlign: "center"
     },
-    addCartButton: {
+    quantity: {
         backgroundColor: '#7444FB',
-        paddingVertical: 6,
+        paddingVertical: 4,
         borderRadius: 20,
-        paddingHorizontal: 25,
+        paddingHorizontal: 6,
         shadowColor: "#000",
         shadowOpacity: 0.24,
         shadowRadius: 7,
         elevation: 4,
         marginVertical: 15
     },
-    textBuyButton: {
+    textQuantityButton: {
         color: '#fff',
         fontSize: 10,
-        fontWeight: 'bold'
-    }
+        fontWeight: 'bold', 
+        textAlign: 'center'
+    }, 
+    cardQuantity:{
+        flexDirection: 'row', 
+        alignContent: 'center'
+    }, 
+    numberQuantity: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: '#772CE8',
+        textAlign: "center"
+    },
 
 })
