@@ -5,6 +5,7 @@ import currencyFormatter from 'currency-formatter';
 import {ShoppingCartProductItem} from '../interfaces/appInterfaces';
 
 const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 
 interface Props {
@@ -15,10 +16,12 @@ interface Props {
 export const ShoppingCard = ({product}: Props) => {
     return(
         <View>
-            <TouchableOpacity style={{ backgroundColor: 'white'}}>
+            <View style={{ backgroundColor: 'white'}}>
+               
                 <View style={{
                     ...styles.cardContainer, 
-                    width: windowWidth * 0.9
+                    width: windowWidth * 0.9, 
+                   height: windowHeight * 0.15
                 }}>
                 <View style={styles.cardContent}>
                     <View style={styles.imageContainer}>
@@ -30,26 +33,28 @@ export const ShoppingCard = ({product}: Props) => {
                     </View>
                     <View style={styles.detailContainer}>
                         <View style= {styles.detailContent}>
-                            <Text style={styles.name}> Nombre:  {product.name}</Text>
-                            <Text style={styles.price}> Precio: {currencyFormatter.format(product.unitPrice, { code: 'COP', precision: 0 })}</Text>
+                            <Text style={styles.name}> {product.name}</Text>
+                            <Text style={styles.price}>  {currencyFormatter.format(product.unitPrice, { code: 'COP', precision: 0 })}  </Text>
                         </View>
                         <View style={styles.cardQuantity}>
-                            <Text>Cantidad: </Text>
-                            <TouchableOpacity style={styles.quantity} 
+                                <TouchableOpacity style={styles.quantity} 
                                 //  onPress= { () => setQuantity( quantity + 1 )}
-                            ><Text style={styles.textQuantityButton}> + </Text>
-                            </TouchableOpacity>
-                            <Text style={styles.numberQuantity}>{product.id}</Text>
-                            <TouchableOpacity style={styles.quantity} 
+                                ><Text style={styles.textQuantityButton}> + </Text>
+                                </TouchableOpacity>
+                                <Text style={styles.numberQuantity}>  {product.id}  </Text>
+                                <TouchableOpacity style={styles.quantity} 
                                 //  onPress= { () => setQuantity( quantity - 1 )}
-                            ><Text style={styles.textQuantityButton}> - </Text>
-                            </TouchableOpacity>
+                                ><Text style={styles.textQuantityButton}> - </Text>
+                                </TouchableOpacity>
                         </View>
+                        
                     </View>
                 </View>
+             
+                        
                      
                 </View>
-            </TouchableOpacity>
+            </View>
            
         </View>
     )
@@ -59,43 +64,58 @@ const styles= StyleSheet.create({
     cardContainer:{
         marginHorizontal: 10,
         height: 100, 
-        width: 10, 
+        maxWidth: 380,
         borderRadius: 5, 
         elevation :1, 
         shadowColor: '#000', 
         shadowRadius: 7,
         backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
 
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
       
     }, 
     cardContent:{
         flex: 1, 
-        flexDirection: 'column', 
+        flexDirection: 'row', 
         backgroundColor: '#F7F7F7', 
         borderTopLeftRadius: 5, 
-        borderBottomRightRadius: 5
+        borderTopRightRadius: 5
     }, 
-    imageContainer:{
-        width: '20%',  
-        height: 20,
+    imageContainer:{ 
+        height: 80,
+        maxWidth: 80,
+        top: 15,
+        left: 10, 
         flex: 1, 
         overflow: 'hidden', 
         alignItems: 'center', 
+        justifyContent: 'center',
+        resizeMode: 'cover',
         backgroundColor: 'white', 
-        position: 'relative'
+        position: 'relative', 
+        marginTop: 1, 
+        alignContent: 'center', 
+   
 
     }, 
     image:{
-        width: 80, 
-        height: 80, 
+        width: '60%', 
+        height: '60%', 
         flex: 1, 
         borderTopLeftRadius: 5, 
-        borderBottomRightRadius: 5
+        borderTopRightRadius: 5, 
+        resizeMode: 'contain'
     }, 
     detailContainer:{
         flex: 1, 
         alignItems: 'center', 
-        flexDirection: 'column', 
+        flexDirection: 'row', 
+        justifyContent: 'center'
 
     }, 
     detailContent: {
@@ -104,24 +124,33 @@ const styles= StyleSheet.create({
         flex: 1, 
         flexDirection: 'column', 
         alignItems: 'center', 
-        justifyContent: 'space-between'
+        //justifyContent: 'space-between'
     }, 
     name:{
         color: '#5C5E64', 
         fontSize: 13, 
         fontWeight: 'bold', 
         textAlign: 'center', 
-        paddingTop: 10
+        top: 20, 
+        left: -20
     }, 
     price:{
         fontWeight: 'bold', 
-        fontSize: 14, 
+        fontSize: 9, 
         color: '#772CE8', 
-        textAlign: 'center'
+        textAlign: 'center', 
+        top: 25,
+        left: -20, 
+        borderColor: '#772CE8', 
+        borderRadius: 5, 
+        borderWidth: 1
     }, 
     cardQuantity:{
         flexDirection: 'row', 
-        alignContent: 'center'
+        alignContent: 'center', 
+        alignItems: 'center', 
+        left: -30, 
+        top: -10
     }, 
     quantity:{
         backgroundColor: '#7444FB',
@@ -132,7 +161,10 @@ const styles= StyleSheet.create({
         shadowOpacity: 0.24,
         shadowRadius: 7,
         elevation: 4,
-        marginVertical: 15
+        marginVertical: 15, 
+        alignItems: 'center', 
+        
+        //top: -20
     }, 
     textQuantityButton:{
         color: '#fff',
@@ -145,5 +177,6 @@ const styles= StyleSheet.create({
         fontSize: 14,
         color: '#772CE8',
         textAlign: "center"
-    }
+    }, 
+    
 })
