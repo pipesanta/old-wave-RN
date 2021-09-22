@@ -13,6 +13,7 @@ import { ShoppingCartItem } from "../interfaces/appInterfaces";
 export interface ShoppingCartState {
     productList: ShoppingCartItem[];
     totalPrice: number;
+    totalProducts: number;
 }
 
 // TYPES
@@ -49,7 +50,7 @@ export const shoppingCartReducer = (state: ShoppingCartState, action: ShoppingCa
                 newList = [action.payload.cartItem, ...state.productList];
             }
 
-            return { ...state, productList: newList }
+            return { ...state, productList: newList, totalProducts: state.totalProducts +1 }
 
         case 'RemoveFromCart': {
             const idToRemove = action.payload.id
