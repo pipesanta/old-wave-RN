@@ -19,7 +19,7 @@ export interface ShoppingCartState {
 
 export type AddToCartAction = { type: 'addToCart', payload: { cartItem: ShoppingCartItem } };
 export type RemoveFromCartAction = { type: 'RemoveFromCart', payload: { id: string } };
-export type SetCartListAction = { type: 'SetCartList', payload: { list: ShoppingCartItem[] } };
+export type SetCartListAction = { type: 'SetCartList', payload: { state: ShoppingCartState } };
 
 export type ShoppingCartAction = AddToCartAction
     | RemoveFromCartAction
@@ -49,18 +49,34 @@ export const shoppingCartReducer = (state: ShoppingCartState, action: ShoppingCa
                 newList = [action.payload.cartItem, ...state.productList];
             }
 
-            return { ...state, productList: newList }
+            const totalPrice = newList.reduce((pv, cv, ci) => {
+                return pv + (cv.price * cv.quantity);
+            }, 0);
+
+            return {
+                ...state,
+                totalPrice,
+                productList: newList
+            }
 
         case 'RemoveFromCart': {
             const idToRemove = action.payload.id
+
+            const newList = [...state.productList].filter(i => i.item.id !== idToRemove);
+
+            const totalPrice = newList.reduce((pv, cv, ci) => {
+                return pv + (cv.price * cv.quantity);
+            }, 0);
+
             return {
                 ...state,
-                productList: [...state.productList].filter(i => i.item.id !== idToRemove)
+                totalPrice,
+                productList: newList
             }
         }
 
         case 'SetCartList': {
-            return { ...state, productList: action.payload.list }
+            return { ...action.payload.state }
         }
 
 
