@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Platform, StyleSheet, View, StyleProp, ViewStyle, ScrollView, Text, Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 // import Icon from 'react-native-vector-icons/Ionicons';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
@@ -42,12 +41,6 @@ export const SearchInput = ({ style, onValueChanges }: Props) => {
                     onChangeText={setTextValue}
                 />
 
-                {/* <Icon
-                    name="search-outline"
-                    color="grey"
-                    size={30}
-                /> */}
-
             </View>
         </View>
     )
@@ -59,9 +52,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#772CE8',
         flex: 1, 
         position: 'absolute',
-        top: 64,
+        top: 60,
         height: 69, 
-        width: 393
+        width: '100%',
+        paddingHorizontal: 12
 
     },
     
@@ -69,7 +63,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F3F1F3',
         borderRadius: 50,
         height: 36,
-        width: 327,
+        width: '100%',
         paddingHorizontal: 20,
         justifyContent: 'center',
         alignItems: 'center',
@@ -83,7 +77,6 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5, 
         top: 19, 
-        left: 19
 
     },
     textInput: {

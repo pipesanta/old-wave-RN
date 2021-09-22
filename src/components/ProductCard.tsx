@@ -19,9 +19,7 @@ export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }:
     return (
         <View>
 
-            <TouchableOpacity
-                onPress={onClick.bind(this, product.id)}
-                activeOpacity={0.9}
+            <View
                 style={{ backgroundColor: 'white' }}>
                 <View style={{
                     ...styles.cardContainer,
@@ -37,13 +35,15 @@ export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }:
                         </View>
                         <View style={styles.detailContainer}>
 
-                            <View style={styles.detailContent} >
+                                <View style={styles.detailContent} >
+                            <TouchableOpacity onPress={onClick.bind(this, product.id)} style={styles.detailButtonContent}>
 
-                                <Text style={styles.name}> {product.nombre} </Text>
-                                <Text style={styles.priceAndBrand}> Apple </Text>
-                                <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.precio, { code: 'COP', precision: 0 })}</Text>
-                            </View>
-                            <TouchableOpacity style={styles.addCartButton}>
+                                    <Text style={styles.name}> {product.nombre} </Text>
+                                    <Text style={styles.priceAndBrand}> Apple </Text>
+                                    <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.precio, { code: 'COP', precision: 0 })}</Text>
+                            </TouchableOpacity>
+                                </View>
+                            <TouchableOpacity style={styles.addCartButton} onPress={onAddToCart}>
                                 <Text style={styles.textBuyButton}>
                                     Agregar al carrito
                             </Text>
@@ -53,15 +53,6 @@ export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }:
                 </View>
 
 
-            </TouchableOpacity>
-            <View >
-                <TouchableOpacity onPress={onAddToCart}>
-                    <Text style={{ fontSize: 14, backgroundColor: 'blue' }}> AÑADIR </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={onDeleteFromCart}>
-                    <Text style={{ fontSize: 14, backgroundColor: 'red' }}> ELIMINAR </Text>
-                </TouchableOpacity>
             </View>
         </View>
 
@@ -122,6 +113,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
+    detailButtonContent: {
+        height:'100%',
+        width:'100%',
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between'},
     brand: {
         fontSize: 12,
         color: '#772CE8',

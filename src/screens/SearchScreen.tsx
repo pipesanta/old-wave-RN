@@ -13,18 +13,14 @@ import {Header} from '../components/Header';
 interface Props extends StackScreenProps<ProductsStackParams, 'SearchScreen'> { };
 
 export const SearchScreen = ({ navigation }: Props) => {
-
     const { products, loadProducts } = useContext(ProductsContext);
     const {
-        productList,
-        totalPrice,
         addItemToCart,
         removeItemFromCart,
-        loadProducts: loadProductsForShoppingCart
     } = useContext(ShoppingCartContext);
 
     //Esto lo pongo para proteger cuando hay celulares con Notch (Como el mío, de Guti)
-    const { top } = useSafeAreaInsets();
+    const { top, bottom } = useSafeAreaInsets();
 
     function goToDetail(id: string): void {
         navigation.navigate('ProductDetailScreen', { id });
@@ -49,18 +45,14 @@ export const SearchScreen = ({ navigation }: Props) => {
 
 
     return (
-        <View style={{ flex: 1, top: top }}>
-            <Header/>
-            <SearchInput onValueChanges={loadProducts} />
-            
-            <TouchableOpacity style={{top: 50}}
-                onPress={goToShoppingCart}>
-                <Text style={{ fontSize: 14, backgroundColor: 'blue' }}> IR AL CARRO </Text>
-            </TouchableOpacity>
-
+        <View style={{ flex: 1, top: top  }}>
+            <Header goToShoppingCart={goToShoppingCart}/>
+            <SearchInput onValueChanges={loadProducts} />   
 
             <View style={{
                 ...styles.globalMargin,
+                top: 40,
+                marginBottom: 120,
                 alignItems: 'center'
             }}>
                 <FlatList
@@ -71,7 +63,7 @@ export const SearchScreen = ({ navigation }: Props) => {
                         <Text style={{
                             ...styles.text,
                             ...styles.globalMargin,
-                            top: 30,
+                            top: 5,
                         }}> Lista productos </Text>
                     )}
                     renderItem={({ item }) => (
@@ -87,8 +79,6 @@ export const SearchScreen = ({ navigation }: Props) => {
                     )}
                 />
             </View>
-
-
         </View>
     )
 }
