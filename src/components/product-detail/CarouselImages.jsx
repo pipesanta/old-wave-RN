@@ -11,7 +11,8 @@ export const CarouselImages = ({images, height, width, activeSlide, setActiveSli
             <Image
                 style={{width, height}}
                 PlaceholderContent={<ActivityIndicator color='#fff'/>}
-                source={{uri:item}}
+                source={{uri:'https://http2.mlstatic.com/D_684803-MLA44155935502_112020-O.jpg'}}
+                resizeMode='contain'
             />
         )
     }

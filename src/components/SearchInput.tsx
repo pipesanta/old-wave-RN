@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Platform, StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, View, StyleProp, ViewStyle, ScrollView, Text, Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 // import Icon from 'react-native-vector-icons/Ionicons';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
-
+import { Icon } from 'react-native-elements/dist/icons/Icon';
 
 interface Props {
     onValueChanges: (value: string) => void;
@@ -25,8 +25,10 @@ export const SearchInput = ({ style, onValueChanges }: Props) => {
             ...styles.container,
             ...style as any
         }}>
+           
             <View style={styles.textBackground}>
-
+                <Icon name='search' color='#772CE8'/>
+                
                 <TextInput
                     placeholder="Buscar"
                     style={{
@@ -39,12 +41,6 @@ export const SearchInput = ({ style, onValueChanges }: Props) => {
                     onChangeText={setTextValue}
                 />
 
-                {/* <Icon
-                    name="search-outline"
-                    color="grey"
-                    size={30}
-                /> */}
-
             </View>
         </View>
     )
@@ -53,12 +49,21 @@ export const SearchInput = ({ style, onValueChanges }: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: 'red'
+        backgroundColor: '#772CE8',
+        flex: 1, 
+        position: 'absolute',
+        top: 60,
+        height: 69, 
+        width: '100%',
+        paddingHorizontal: 12
+
     },
+    
     textBackground: {
         backgroundColor: '#F3F1F3',
         borderRadius: 50,
-        height: 40,
+        height: 36,
+        width: '100%',
         paddingHorizontal: 20,
         justifyContent: 'center',
         alignItems: 'center',
@@ -70,11 +75,14 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
+        elevation: 5, 
+        top: 19, 
 
-        elevation: 5,
     },
     textInput: {
         flex: 1,
         fontSize: 18,
-    }
+  
+    }, 
+  
 });

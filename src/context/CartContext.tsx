@@ -7,6 +7,7 @@ import { shoppingCartReducer, ShoppingCartState } from '../reducers/ShoppingCart
 type CartContextProps = {
     productList: ShoppingCartItem[];
     totalPrice: number;
+    totalProducts: number;
     loadProducts: (idList: string[]) => Promise<void>;
     addItemToCart: (item: ShoppingCartItem) => void,
     removeItemFromCart: (item: string) => void
@@ -14,7 +15,8 @@ type CartContextProps = {
 
 const shoppingCartState: ShoppingCartState = {
     productList: [],
-    totalPrice: 0
+    totalPrice: 0,
+    totalProducts: 0
 }
 
 const localStorageKeyForCartState = "cartState";
@@ -64,6 +66,7 @@ export const ShoppingCartProvider = ({ children }: any) => {
         <ShoppingCartContext.Provider value={{
             productList: state.productList,
             totalPrice: state.totalPrice,
+            totalProducts: state.totalProducts,
             loadProducts,
             addItemToCart,
             removeItemFromCart

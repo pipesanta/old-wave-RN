@@ -13,6 +13,7 @@ import { ShoppingCartItem } from "../interfaces/appInterfaces";
 export interface ShoppingCartState {
     productList: ShoppingCartItem[];
     totalPrice: number;
+    totalProducts: number;
 }
 
 // TYPES
@@ -56,6 +57,7 @@ export const shoppingCartReducer = (state: ShoppingCartState, action: ShoppingCa
             return {
                 ...state,
                 totalPrice,
+                totalProducts: newList.length,
                 productList: newList
             }
 
@@ -71,6 +73,7 @@ export const shoppingCartReducer = (state: ShoppingCartState, action: ShoppingCa
             return {
                 ...state,
                 totalPrice,
+                totalProducts: newList.length,
                 productList: newList
             }
         }
