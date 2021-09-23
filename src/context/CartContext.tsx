@@ -28,11 +28,10 @@ export const ShoppingCartProvider = ({ children }: any) => {
     const [state, dispatch] = useReducer(shoppingCartReducer, shoppingCartState);
 
     useEffect(() => {
-        //load local storage
+        // load local storage
         AsyncStorage.getItem(localStorageKeyForCartState).then(d => {
-            console.log('leyendo el ', { d })
+            // console.log('leyendo el ', { d })
             if (d) {
-
                 const newState: ShoppingCartState = JSON.parse(d);
                 dispatch({
                     type: 'SetCartList',
@@ -40,6 +39,11 @@ export const ShoppingCartProvider = ({ children }: any) => {
                 })
             }
         })
+
+        // AsyncStorage.removeItem(localStorageKeyForCartState).then(() => {
+        //     console.log('eeee');
+
+        // })
 
     }, []);
 

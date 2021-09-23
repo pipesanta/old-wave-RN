@@ -57,7 +57,7 @@ export const shoppingCartReducer = (state: ShoppingCartState, action: ShoppingCa
             return {
                 ...state,
                 totalPrice,
-                totalProducts: newList.length,
+                totalProducts: newList.reduce((pv, cv) => pv + (cv.quantity), 0),
                 productList: newList
             }
 
@@ -73,7 +73,7 @@ export const shoppingCartReducer = (state: ShoppingCartState, action: ShoppingCa
             return {
                 ...state,
                 totalPrice,
-                totalProducts: newList.length,
+                totalProducts: newList.reduce((pv, cv) => pv + (cv.quantity), 0),
                 productList: newList
             }
         }

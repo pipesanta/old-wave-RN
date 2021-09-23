@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const baseURL = 'https://json-server-oldwave.herokuapp.com';
+const baseUrlFastApi = 'https://oldwave-json-server-definitive.herokuapp.com';
+const baseUrlSpringBoot = 'https://oldwave-json-server-definitive.herokuapp.com';
+const baseUrlFlask = 'https://oldwave-json-server-definitive.herokuapp.com';
 
-const oldWaveAPI = axios.create({ baseURL });
-
-export default oldWaveAPI;
+export const oldWaveFastAPI = axios.create({ baseURL: baseUrlFastApi });
+export const oldWaveSpringBoot = axios.create({ baseURL: baseUrlSpringBoot });
+export const oldWaveFlask = axios.create({ baseURL: baseUrlFlask });
