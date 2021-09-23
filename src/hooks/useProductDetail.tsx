@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import { ProductsContext } from '../context/ProductsContext';
+import { CompleteProduct } from '../interfaces/appInterfaces';
 
-interface MovieDetails {
+interface ProductDetails {
     isLoading: boolean;
-    productDetail?: any;
+    productDetail?: CompleteProduct;
 }
 
 
@@ -11,7 +12,7 @@ export const useProductDetail = (productId: string) => {
 
     const { loadProductById } = useContext(ProductsContext);
 
-    const [state, setState] = useState<MovieDetails>({
+    const [state, setState] = useState<ProductDetails>({
         isLoading: true,
         productDetail: undefined,
     });

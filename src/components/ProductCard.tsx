@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SimpleProduct } from '../interfaces/productInterfaces';
 import currencyFormatter from 'currency-formatter';
 import { Icon } from 'react-native-elements';
+import { SimpleProduct } from '../interfaces/appInterfaces';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -29,7 +29,7 @@ export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }:
                     <View style={styles.cardContent}>
                         <View style={styles.imageContainer}>
                             <Image
-                                source={{ uri: 'https://http2.mlstatic.com/D_684803-MLA44155935502_112020-O.jpg' }}
+                                source={{ uri: product.thumbnail }}
                                 style={styles.image}
                                 resizeMode='contain'
                             />
@@ -37,28 +37,28 @@ export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }:
                         <View style={styles.detailContainer}>
 
                             <View style={styles.detailContent} >
-                                <TouchableOpacity onPress={onClick.bind(this, product.id)} style={styles.detailButtonContent}>
-                                    <View style={{ flexDirection: "row", justifyContent: 'space-between', width: '100%'}}>
+                                <TouchableOpacity onPress={onClick.bind(this, product.id || '')} style={styles.detailButtonContent}>
+                                    <View style={{ flexDirection: "row", justifyContent: 'space-between', width: '100%' }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start' }}>
                                             <Icon name='location-outline' type='ionicon' color='#000' size={15} />
-                                            <Text style={{ ...styles.city }}> {product.ciudad}</Text>
+                                            <Text style={{ ...styles.city }}> {product.city?.name}</Text>
                                         </View>
-                                        <View style={{flex:1}}></View>
+                                        <View style={{ flex: 1 }}></View>
                                         <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start' }}>
                                             <Text style={{ ...styles.city }}>{product.rating} </Text>
                                             <Icon name='star' type='ionicon' color='#F1AE08' size={15} />
                                         </View>
                                     </View>
-                                    <Text style={styles.name}> {product.nombre} </Text>
-                                    <Text style={styles.priceAndBrand}> {product.marca} </Text>
-                                    <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.precio, { code: 'COP', precision: 0 })}</Text>
+                                    <Text style={styles.name}> {product.name} </Text>
+                                    <Text style={styles.priceAndBrand}> {product.brand} </Text>
+                                    <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.price, { code: 'COP', precision: 0 })}</Text>
 
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity style={styles.addCartButton} onPress={onAddToCart}>
                                 <Text style={styles.textBuyButton}>
                                     Agregar al carrito
-                            </Text>
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     </View>

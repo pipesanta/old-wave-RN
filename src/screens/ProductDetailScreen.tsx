@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ProductsStackParams } from '../navigator/ProductsNavigator';
 import { ProductDetail } from '../components/product-detail/ProductDetail';
 import { ShoppingCartContext } from '../context/CartContext';
+import { CompleteProduct } from '../interfaces/appInterfaces';
 
 interface Props extends StackScreenProps<ProductsStackParams, 'ProductDetailScreen'> { };
 
@@ -14,9 +15,12 @@ export const ProductDetailScreen = ({ route, navigation }: Props) => {
     const { top, left } = useSafeAreaInsets();
     const { id } = route.params;
 
-    function goToShoppingCart(item:any) {
-        onAddItemTocart(item);
-        navigation.navigate('ShoppingCartScreen')
+    function goToShoppingCart(item?: CompleteProduct) {
+        if (item) {
+            onAddItemTocart(item);
+            navigation.navigate('ShoppingCartScreen')
+        }
+
     }
 
     const { addItemToCart } = useContext(ShoppingCartContext);
@@ -41,7 +45,11 @@ export const ProductDetailScreen = ({ route, navigation }: Props) => {
             {
                 isLoading
                     ? <ActivityIndicator size={35} color="grey" style={{ marginTop: 20 }} />
-                    : <ProductDetail productFull={productDetail!} onAddToCart={onAddItemTocart.bind(this, productDetail)} goToShoppingCart={goToShoppingCart.bind(this, productDetail)}/>
+                    : <ProductDetail
+                        productFull={productDetail!}
+                        onAddToCart={onAddItemTocart.bind(this, productDetail)}
+                        goToShoppingCart={goToShoppingCart.bind(this, productDetail)}
+                    />
             }
         </>
     )

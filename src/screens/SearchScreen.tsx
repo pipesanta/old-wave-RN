@@ -7,8 +7,8 @@ import { SearchInput } from '../components/SearchInput'
 import { ProductsContext } from '../context/ProductsContext';
 import { ShoppingCartContext } from '../context/CartContext';
 import { ProductsStackParams } from '../navigator/ProductsNavigator'
-import { SimpleProduct } from '../interfaces/productInterfaces';
-import {Header} from '../components/Header';
+import { Header } from '../components/Header';
+import { SimpleProduct } from '../interfaces/appInterfaces'
 
 interface Props extends StackScreenProps<ProductsStackParams, 'SearchScreen'> { };
 
@@ -28,13 +28,13 @@ export const SearchScreen = ({ navigation }: Props) => {
 
     function onAddItemTocart(item: SimpleProduct) {
         addItemToCart({
-            price: item.precio,
+            price: item.price,
             quantity: 1,
             selected: false,
             item: {
                 id: item.id,
-                name: item.nombre,
-                unitPrice: item.precio
+                name: item.name,
+                unitPrice: item.price
             }
         })
     }
@@ -45,9 +45,9 @@ export const SearchScreen = ({ navigation }: Props) => {
 
 
     return (
-        <View style={{ flex: 1, top: top  }}>
-            <Header goToShoppingCart={goToShoppingCart}/>
-            <SearchInput onValueChanges={loadProducts} />   
+        <View style={{ flex: 1, top: top }}>
+            <Header goToShoppingCart={goToShoppingCart} />
+            <SearchInput onValueChanges={loadProducts} />
 
             <View style={{
                 ...styles.globalMargin,
