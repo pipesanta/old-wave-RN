@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SimpleProduct } from '../interfaces/productInterfaces';
 import currencyFormatter from 'currency-formatter';
+import { Icon } from 'react-native-elements';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -35,14 +36,25 @@ export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }:
                         </View>
                         <View style={styles.detailContainer}>
 
-                                <View style={styles.detailContent} >
-                            <TouchableOpacity onPress={onClick.bind(this, product.id)} style={styles.detailButtonContent}>
-
+                            <View style={styles.detailContent} >
+                                <TouchableOpacity onPress={onClick.bind(this, product.id)} style={styles.detailButtonContent}>
+                                    <View style={{ flexDirection: "row", justifyContent: 'space-between', width: '100%'}}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start' }}>
+                                            <Icon name='location-outline' type='ionicon' color='#000' size={15} />
+                                            <Text style={{ ...styles.city }}> {product.ciudad}</Text>
+                                        </View>
+                                        <View style={{flex:1}}></View>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start' }}>
+                                            <Text style={{ ...styles.city }}>{product.rating} </Text>
+                                            <Icon name='star' type='ionicon' color='#F1AE08' size={15} />
+                                        </View>
+                                    </View>
                                     <Text style={styles.name}> {product.nombre} </Text>
-                                    <Text style={styles.priceAndBrand}> Apple </Text>
+                                    <Text style={styles.priceAndBrand}> {product.marca} </Text>
                                     <Text style={styles.priceAndBrand}> {currencyFormatter.format(product.precio, { code: 'COP', precision: 0 })}</Text>
-                            </TouchableOpacity>
-                                </View>
+
+                                </TouchableOpacity>
+                            </View>
                             <TouchableOpacity style={styles.addCartButton} onPress={onAddToCart}>
                                 <Text style={styles.textBuyButton}>
                                     Agregar al carrito
@@ -88,7 +100,14 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: 'bold',
         textAlign: "center",
-        paddingTop: 10
+        paddingTop: 5
+    },
+    city: {
+        color: '#5C5E64',
+        fontSize: 13,
+        fontWeight: 'bold',
+        textAlign: "right",
+        paddingTop: 5
     },
     imageContainer: {
         width: '100%',
@@ -114,12 +133,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     detailButtonContent: {
-        height:'100%',
-        width:'100%',
+        height: '100%',
+        width: '100%',
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-between'},
+        justifyContent: 'space-between'
+    },
     brand: {
         fontSize: 12,
         color: '#772CE8',
@@ -151,7 +171,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.24,
         shadowRadius: 7,
         elevation: 4,
-        marginVertical: 15
+        marginVertical: 9
     },
     textBuyButton: {
         color: '#fff',

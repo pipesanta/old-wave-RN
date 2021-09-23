@@ -51,10 +51,5 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column"
-    },
-    pokebolaBG: {
-        width: 300,
-        height: 300,
-        alignSelf: "center"
     }
 });

@@ -44,7 +44,7 @@ export const ProductDetail = ({ productFull, onAddToCart, goToShoppingCart }: Pr
                 <View style={{ ...styles.marginContainer, ...styles.locationContainer }}>
                     {/* <Text style={styles.subTitle}>{productFull.ciudad}</Text> */}
                     <Icon name='location-outline' type='ionicon' color='#000' />
-                    <Text style={{ ...styles.subTitle }}> Medellín</Text>
+                    <Text style={{ ...styles.subTitle }}> {productFull.ciudad}</Text>
                 </View>
 
                 <View style={{ ...styles.marginContainer, marginTop: 0 }}>
