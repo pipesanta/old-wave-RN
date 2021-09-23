@@ -52,7 +52,9 @@ export const ProductsProvider = ({ children }: any) => {
                 apiRest = oldWaveFastAPI;
         }
 
-        const res = await apiRest.get<CompleteProduct>(`items/${id}`);
+        const parsedId = id.split('-')[1];
+
+        const res = await apiRest.get<CompleteProduct>(`items/${parsedId}`);
 
         return res.data;
     };

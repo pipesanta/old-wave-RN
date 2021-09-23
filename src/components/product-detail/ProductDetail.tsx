@@ -9,6 +9,7 @@ import { ItemDetail } from './ItemDetail'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CompleteProduct } from '../../interfaces/appInterfaces';
 
+
 const screenHeight = Dimensions.get('screen').height;
 const screenWidth = Dimensions.get('screen').width;
 
@@ -22,6 +23,9 @@ export const ProductDetail = ({ productFull, onAddToCart, goToShoppingCart }: Pr
     const { top } = useSafeAreaInsets();
     const navigation = useNavigation();
     const [activeSlide, setActiveSlide] = useState(0);
+
+
+
     return (
         <>
             <ScrollView>
