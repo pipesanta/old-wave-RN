@@ -16,11 +16,11 @@ const screenWidth = Dimensions.get('screen').width;
 
 interface Props {
     productFull: any;
-  
+    onAddToCart?: () => void;
+    goToShoppingCart: () => void;
 }
 
-
-export const ProductDetail = ({ productFull}: Props) => {
+export const ProductDetail = ({ productFull, onAddToCart, goToShoppingCart }: Props) => {
     const {top} = useSafeAreaInsets();
     const navigation = useNavigation();
     const [activeSlide, setActiveSlide] = useState(0);
@@ -50,7 +50,7 @@ export const ProductDetail = ({ productFull}: Props) => {
                 <View style={{ ...styles.marginContainer, ...styles.locationContainer }}>
                     {/* <Text style={styles.subTitle}>{productFull.ciudad}</Text> */}
                     <Icon name='location-outline' type='ionicon' color='#000' />
-                    <Text style={{ ...styles.subTitle }}> Medellín</Text>
+                    <Text style={{ ...styles.subTitle }}> {productFull.ciudad}</Text>
                 </View>
 
                 <View style={{ ...styles.marginContainer, marginTop: 0 }}>
@@ -74,13 +74,13 @@ export const ProductDetail = ({ productFull}: Props) => {
                         hasta 1x de {currencyFormatter.format(productFull.precio, { code: 'COP', precision: 0 })}
                     </Text>
                 </View>
-                <View style={ styles.actionsContainer}>
-                    <TouchableOpacity style={styles.buyButton} >
+                <View style={ styles.actionsContainer} >
+                    <TouchableOpacity style={styles.buyButton} onPress={goToShoppingCart} >
                         <Text style={styles.textBuyButton}>
                             COMPRAR
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.addCardButton} >
+                    <TouchableOpacity style={styles.addCardButton} onPress={onAddToCart}>
                         <Icon name='cart-outline' type='ionicon' color='#fff' size={25} />
                     </TouchableOpacity>
 

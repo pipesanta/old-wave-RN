@@ -15,9 +15,9 @@ export const Navigator = () => {
         }
       }}
     >
-      {/* <Stack.Screen name="ProductsNavigator" component={ProductsNavigator} /> */}
-      <Stack.Screen name="ShoppingCartScreen"
-                component={ShoppingCartScreen} />
-    </Stack.Navigator>
+      <Stack.Screen name="ProductsNavigator" component={ProductsNavigator} /> 
+      {/* <Stack.Screen name="ShoppingCartScreen"
+                component={ShoppingCartScreen} /> */}
+    </Stack.Navigator> 
   );
 }
