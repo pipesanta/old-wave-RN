@@ -61,7 +61,7 @@ export const ProductDetail = ({ productFull, onAddToCart, goToShoppingCart }: Pr
                 </View>
                 <ItemDetail title={'MARCA'} content={'Apple'} />
                 <ItemDetail title={'DESCRIPCION'} content={productFull.description} />
-                <ItemDetail title={'VENDEDOR'} content={''} reseller={productFull.seller?.name} />
+                <ItemDetail title={'VENDEDOR'} content={''} reseller={productFull.seller} />
             </ScrollView>
 
             <View style={styles.priceContainer} >

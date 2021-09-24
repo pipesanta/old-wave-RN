@@ -8,12 +8,12 @@ interface Props {
 
 export const ResellerCard = ({ reseller }: Props) => {
 
-    const uri = reseller.urlLogo;
+    const uri = reseller.logo;
 
     return (
         <View style={ styles.container }>
             {
-                reseller.urlLogo && (
+                reseller.logo && (
                     <Image 
                         source={{ uri }}
                         style={{ width: 50, height: 50, borderRadius: 10 }}
@@ -24,7 +24,7 @@ export const ResellerCard = ({ reseller }: Props) => {
 
             <View style={ styles.resellerInfo }>
                 <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                    { reseller.nombre }
+                    { reseller.name }
                 </Text>
             </View>
 

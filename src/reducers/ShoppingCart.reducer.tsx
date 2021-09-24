@@ -19,10 +19,12 @@ export interface ShoppingCartState {
 // TYPES
 
 export type AddToCartAction = { type: 'addToCart', payload: { cartItem: ShoppingCartItem } };
+export type SubstractFromCartAction = { type: 'SubstractFromCart', payload: { cartItem: ShoppingCartItem } };
 export type RemoveFromCartAction = { type: 'RemoveFromCart', payload: { id: string } };
 export type SetCartListAction = { type: 'SetCartList', payload: { state: ShoppingCartState } };
 
 export type ShoppingCartAction = AddToCartAction
+    | SubstractFromCartAction
     | RemoveFromCartAction
     | SetCartListAction
 
@@ -60,6 +62,29 @@ export const shoppingCartReducer = (state: ShoppingCartState, action: ShoppingCa
                 totalProducts: newList.reduce((pv, cv) => pv + (cv.quantity), 0),
                 productList: newList
             }
+
+        case 'SubstractFromCart': {
+            let auxList, newList: ShoppingCartItem[] = [];
+                auxList = [...state.productList].map((ci) => {
+                    if (ci.item.id === action.payload.cartItem.item.id) {
+                        ci.quantity--;
+                    }
+                    return ci
+                });
+
+            newList = [...auxList].filter(i => i.quantity !== 0 );
+
+            const totalPrice = newList.reduce((pv, cv, ci) => {
+                return pv + (cv.price * cv.quantity);
+            }, 0);
+
+            return {
+                ...state,
+                totalPrice,
+                totalProducts: newList.reduce((pv, cv) => pv + (cv.quantity), 0),
+                productList: newList
+            }
+        }
 
         case 'RemoveFromCart': {
             const idToRemove = action.payload.id

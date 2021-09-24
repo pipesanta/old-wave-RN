@@ -1,14 +1,14 @@
 
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ProductsStackParams } from '../navigator/ProductsNavigator';
 import { ShoppingCartContext } from '../context/CartContext';
 import { Header } from '../components/Header';
+import currencyFormatter from 'currency-formatter';
 import { ShoppingCard } from '../components/ShoppingCard';
-import { ShoppingCartProductItem } from '../interfaces/appInterfaces';
-import { ProductCard } from '../components/ProductCard';
+import { ShoppingCartItem} from '../interfaces/appInterfaces';
 
 
 interface Props extends StackScreenProps<ProductsStackParams, 'ShoppingCartScreen'> { };
@@ -18,46 +18,41 @@ interface Props extends StackScreenProps<ProductsStackParams, 'ShoppingCartScree
 export const ShoppingCartScreen = ({ route }: Props) => {
     const { top, left } = useSafeAreaInsets();
 
+    function onAddItemTocart(item: ShoppingCartItem) {
+        addItemToCart({
+            price: item.item.unitPrice,
+            quantity: 1,
+            selected: false,
+            item: {
+                id: item.item.id,
+                name: item.item.name,
+                unitPrice: item.item.unitPrice,
+                image: item.item.image
+            }
+        })
+    }
+
+    function onSubstractItemTocart(item: ShoppingCartItem) {
+        substractFromCart({
+            price: item.item.unitPrice,
+            quantity: 1,
+            selected: false,
+            item: {
+                id: item.item.id,
+                name: item.item.name,
+                unitPrice: item.item.unitPrice,
+                image: item.item.image
+            }
+        })
+    }
+
     const {
         productList,
         totalPrice,
         addItemToCart,
-        removeItemFromCart,
-        loadProducts: loadProductsForShoppingCart
+        substractFromCart
     } = useContext(ShoppingCartContext);
 
-    const product = [
-        {
-            "id": "1",
-            "name": "Iphone 11",
-            "unitPrice": 2000000,
-
-        },
-        {
-            "id": "2",
-            "name": "Iphone 3",
-            "unitPrice": 3200000,
-
-        },
-        {
-            "id": "3",
-            "name": "Iphone 15",
-            "unitPrice": 7200000,
-
-        },
-        {
-            "id": "4",
-            "name": "Camara",
-            "unitPrice": 200000,
-
-        },
-        {
-            "id": "5",
-            "name": "Samsung",
-            "unitPrice": 2200000,
-
-        }
-    ]
 
     return (
         <View style={styles.cardContainer}>
@@ -67,24 +62,22 @@ export const ShoppingCartScreen = ({ route }: Props) => {
                     // esto que hace? ?
                 }} />
                 <FlatList
-                    data={product}
-                    keyExtractor={(p) => p.id}
+                    data={productList}
+                    keyExtractor={(p) => p.item.id}
                     numColumns={1}
                     ListHeaderComponent={(
                         <Text style={{
-                            ...styles.shoppingCart,
-                            ...styles.globalMargin
-                        }}> Shopping cart </Text>
+                            ...styles.shoppingCart
+                        }}> Carrito de compras </Text>
 
                     )}
                     renderItem={({ item }) => (
-                        <ShoppingCard product={item} />
+                        <ShoppingCard product={item} onAddToCart={onAddItemTocart.bind(this, item)} onSubstractFromCart={onSubstractItemTocart.bind(this, item)} />
                     )}
                     ItemSeparatorComponent={() => (
-                        <View style={styles.globalMargin} />
+                        <View style={{ height: 10 }} />
                     )}
                 />
-                {/* <Text> {JSON.stringify(productList)} </Text> */}
             </View>
             <View style={styles.subtotalBuyCard}>
 
@@ -92,11 +85,12 @@ export const ShoppingCartScreen = ({ route }: Props) => {
                 <View style={styles.subtotalCard}>
                     <View style={styles.subtotal}>
                         <Text style={styles.subtotalText}> SUBTOTAL: </Text>
+                        <Text style={styles.subtotalText}>{currencyFormatter.format(totalPrice, { code: 'COP', precision: 0 })}</Text>
                     </View>
                 </View>
                 <View style={styles.buyCard}>
                     <TouchableOpacity style={styles.buyButtom}>
-                        <Text style={styles.textBuyBottom}> Comprar </Text>
+                        <Text style={styles.textBuyBottom}> Ir al pago </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -121,10 +115,10 @@ const styles = StyleSheet.create({
     },
     shoppingCart: {
         color: '#772CE8',
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 'bold',
-        textAlign: "center",
-        paddingTop: 10,
+        textAlign: "left",
+        paddingVertical: 10,
 
     },
     globalMargin: {
@@ -160,7 +154,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#F7F7F7',
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
-        justifyContent: 'center'
+        paddingHorizontal: 10,
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     subtotalText: {
         textAlign: 'center',
