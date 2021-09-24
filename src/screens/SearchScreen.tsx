@@ -16,7 +16,6 @@ export const SearchScreen = ({ navigation }: Props) => {
     const { products, loadProducts } = useContext(ProductsContext);
     const {
         addItemToCart,
-        removeItemFromCart,
     } = useContext(ShoppingCartContext);
 
     //Esto lo pongo para proteger cuando hay celulares con Notch (Como el mío, de Guti)
@@ -34,7 +33,8 @@ export const SearchScreen = ({ navigation }: Props) => {
             item: {
                 id: item.id,
                 name: item.name,
-                unitPrice: item.price
+                unitPrice: item.price,
+                image: item.thumbnail
             }
         })
     }
@@ -71,7 +71,6 @@ export const SearchScreen = ({ navigation }: Props) => {
                             product={item}
                             onClick={goToDetail.bind(this)}
                             onAddToCart={onAddItemTocart.bind(this, item)}
-                            onDeleteFromCart={removeItemFromCart.bind(this, item.id)}
                         />
                     )}
                     ItemSeparatorComponent={() => (

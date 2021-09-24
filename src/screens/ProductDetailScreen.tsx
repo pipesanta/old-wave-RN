@@ -32,7 +32,8 @@ export const ProductDetailScreen = ({ route, navigation }: Props) => {
             item: {
                 id: item.id,
                 name: item.nombre,
-                unitPrice: item.precio
+                unitPrice: item.precio,
+                image: item.pictures[0]
             }
         })
     }
@@ -44,7 +45,7 @@ export const ProductDetailScreen = ({ route, navigation }: Props) => {
 
             {
                 isLoading
-                    ? <ActivityIndicator size={35} color="grey" style={{ marginTop: 20 }} />
+                    ? <ActivityIndicator size={35} color="grey" style={{ marginTop: top }} />
                     : <ProductDetail
                         productFull={productDetail!}
                         onAddToCart={onAddItemTocart.bind(this, productDetail)}

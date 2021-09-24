@@ -11,10 +11,9 @@ interface Props {
     product: SimpleProduct,
     onClick: (id: string) => void;
     onAddToCart?: () => void;
-    onDeleteFromCart?: () => void;
 }
 
-export const ProductCard = ({ product, onClick, onAddToCart, onDeleteFromCart }: Props) => {
+export const ProductCard = ({ product, onClick, onAddToCart}: Props) => {
 
 
     return (
@@ -152,8 +151,6 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
         flex: 1
     },
     priceAndBrand: {

@@ -23,6 +23,7 @@ export interface ShoppingCartProductItem {
     id: string;
     name: string;
     unitPrice: number;
+    image?: string;
 }
 export interface ShoppingCartItem {
     quantity: number,

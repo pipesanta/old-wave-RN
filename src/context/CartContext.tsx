@@ -10,6 +10,7 @@ type CartContextProps = {
     totalProducts: number;
     loadProducts: (idList: string[]) => Promise<void>;
     addItemToCart: (item: ShoppingCartItem) => void,
+    substractFromCart: (item: ShoppingCartItem) => void,
     removeItemFromCart: (item: string) => void
 }
 
@@ -30,7 +31,6 @@ export const ShoppingCartProvider = ({ children }: any) => {
     useEffect(() => {
         // load local storage
         AsyncStorage.getItem(localStorageKeyForCartState).then(d => {
-            // console.log('leyendo el ', { d })
             if (d) {
                 const newState: ShoppingCartState = JSON.parse(d);
                 dispatch({
@@ -39,11 +39,6 @@ export const ShoppingCartProvider = ({ children }: any) => {
                 })
             }
         })
-
-        // AsyncStorage.removeItem(localStorageKeyForCartState).then(() => {
-        //     console.log('eeee');
-
-        // })
 
     }, []);
 
@@ -62,6 +57,10 @@ export const ShoppingCartProvider = ({ children }: any) => {
         dispatch({ type: 'addToCart', payload: { cartItem: item } });
     }
 
+    function substractFromCart(item: ShoppingCartItem) {
+        dispatch({ type: 'SubstractFromCart', payload: { cartItem: item } });
+    }
+
     function removeItemFromCart(id: string) {
         dispatch({ type: 'RemoveFromCart', payload: { id } })
     }
@@ -73,6 +72,7 @@ export const ShoppingCartProvider = ({ children }: any) => {
             totalProducts: state.totalProducts,
             loadProducts,
             addItemToCart,
+            substractFromCart,
             removeItemFromCart
         }}>
             {children}
