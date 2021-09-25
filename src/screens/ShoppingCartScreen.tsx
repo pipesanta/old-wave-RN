@@ -55,7 +55,7 @@ export const ShoppingCartScreen = ({ route }: Props) => {
 
 
     return (
-        <View style={styles.cardContainer}>
+        <View style={{...styles.cardContainer, marginTop:top}}>
             <View style={styles.shoppingCard}>
                 <Header goToShoppingCart={() => {
                     // TODO
