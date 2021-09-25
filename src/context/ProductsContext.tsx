@@ -31,21 +31,18 @@ export const ProductsProvider = ({ children }: any) => {
 
     const loadProducts = async (q: string) => {
 
-        const [fastResponse, flaskResponse] = await Promise.all([
-            // oldWaveFastAPI.get<SimpleProduct[]>(`/items?q=${q}`),
+        const [fastResponse, flaskResponse, graphqlResponse] = await Promise.all([
             fastApiInstance.searchByKeyword(q),
             flaskApiInstance.searchByKeyword(q),
-            // graphQlApiInstance
-            // oldWaveSpringBoot.get<SimpleProduct[]>(`/items?q=${q}`),
-            // oldWaveFlask.get<SimpleProduct[]>(`/items?q=${q}`)
+            graphQlApiInstance.searchByKeyword(q)
         ]);
+
 
 
         const joinedResponses = [
             ...fastResponse,
-            ...flaskResponse
-            // ...springBootResponse.data.map(i => ({ ...i, id: `${spring}-${i.id}` })),
-            // ...flaskResponse.data.map(i => ({ ...i, id: `${flask}-${i.id}` }))
+            ...flaskResponse,
+            ...graphqlResponse
         ];
 
         setProducts(joinedResponses);
@@ -53,7 +50,7 @@ export const ProductsProvider = ({ children }: any) => {
 
     const loadProductById = async (id: string, sellerKey: string): Promise<CompleteProduct> => {
 
-        let apiRest: FastApi | FlaskApi;
+        let apiRest: FastApi | FlaskApi | GraphQlAPI;
 
         switch (sellerKey) {
             case APIKeysEnum.FAST:
@@ -61,6 +58,9 @@ export const ProductsProvider = ({ children }: any) => {
                 break;
             case APIKeysEnum.FLASK:
                 apiRest = flaskApiInstance;
+                break;
+            case APIKeysEnum.GRAPHQL:
+                apiRest = graphQlApiInstance;
                 break;
 
             default:
