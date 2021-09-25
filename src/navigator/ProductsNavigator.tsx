@@ -8,7 +8,8 @@ export type ProductsStackParams = {
     SearchScreen: undefined,
     ShoppingCartScreen: undefined,
     ProductDetailScreen: {
-        id: string
+        id: string,
+        sellerKey: string
     }
 }
 

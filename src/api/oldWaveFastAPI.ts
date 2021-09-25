@@ -14,12 +14,13 @@ export class FastApi {
     searchByKeyword(query: string) {
         return this.axiosIntance.get<any>(`/search?q=${query}`)
             .then(r => {
-                console.log('%%%', r)
                 let items = r.data.items;
-                const sellerName = r.data.seller.name;
+                const sellerName = APIKeysEnum.FAST;
+
                 items = items.map((item: any) => {
                     item.id = `${sellerName}-${item.id}`;
                     item.sellerKey = APIKeysEnum.FAST;
+
                     return item;
                 });
 
@@ -33,7 +34,6 @@ export class FastApi {
 
     searchProductById(productId: string) {
         const [sellerName, realId] = productId.split('-');
-        console.log('##############');
 
         return this.axiosIntance.get<any>(`/items/${realId}`)
             .then(response => {

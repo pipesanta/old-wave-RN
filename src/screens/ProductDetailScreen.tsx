@@ -1,7 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import { StyleSheet, ActivityIndicator } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, Text } from 'react-native';
 import { useProductDetail } from '../hooks/useProductDetail';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ProductsStackParams } from '../navigator/ProductsNavigator';
 import { ProductDetail } from '../components/product-detail/ProductDetail';
@@ -13,7 +13,7 @@ interface Props extends StackScreenProps<ProductsStackParams, 'ProductDetailScre
 
 export const ProductDetailScreen = ({ route, navigation }: Props) => {
     const { top, left } = useSafeAreaInsets();
-    const { id } = route.params;
+    const { id, sellerKey } = route.params;
 
     function goToShoppingCart(item?: CompleteProduct) {
         if (item) {
@@ -38,20 +38,26 @@ export const ProductDetailScreen = ({ route, navigation }: Props) => {
         })
     }
 
-    const { isLoading, productDetail } = useProductDetail(id);
+    const { isLoading, productDetail } = useProductDetail(id, sellerKey);
+
+
 
     return (
         <>
+            {isLoading && <ActivityIndicator size={35} color="grey" style={{ marginTop: top }} />}
 
-            {
-                isLoading
-                    ? <ActivityIndicator size={35} color="grey" style={{ marginTop: top }} />
-                    : <ProductDetail
-                        productFull={productDetail!}
-                        onAddToCart={onAddItemTocart.bind(this, productDetail)}
-                        goToShoppingCart={goToShoppingCart.bind(this, productDetail)}
-                    />
-            }
+            {(!isLoading && productDetail) && <ProductDetail
+                productFull={productDetail!}
+                onAddToCart={onAddItemTocart.bind(this, productDetail)}
+                goToShoppingCart={goToShoppingCart.bind(this, productDetail)}
+            />}
+
+            {(!isLoading && !productDetail) && <View style={{ top: top + 10 }}>
+                <Text style={{ color: 'red', fontSize: 50, textAlign: 'center', justifyContent: 'center' }}>
+                    {'ERROR DEL SERVIDOR - '} {sellerKey}
+                </Text>
+            </View>}
+
         </>
     )
 }

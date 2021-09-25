@@ -14,10 +14,9 @@ export class FlaskApi {
     searchByKeyword(query: string) {
         return this.axiosIntance.get<any>(`/search?q=${query}`)
             .then(r => {
-                console.log('%%%%%%',r)
-                let items = r.data.items;
-                const sellerName = r.data.seller.name;
-                items = items.map((item: any) => {
+                let responseObject = r.data[0];
+                const sellerName = APIKeysEnum.FLASK;
+                const items = responseObject.items.map((item: any) => {
                     item.id = `${sellerName}-${item.id}`;
                     item.sellerKey = APIKeysEnum.FLASK;
                     return item;
@@ -26,19 +25,17 @@ export class FlaskApi {
                 return Promise.resolve(items);
             })
             .catch(e => {
-                console.log('errorrrr', e);
+                console.log('errorr', e);
                 return Promise.resolve([]);
             })
     }
 
     searchProductById(productId: string) {
         const [sellerName, realId] = productId.split('-');
-        console.log('##############');
-
         return this.axiosIntance.get<any>(`/item/${realId}`)
             .then(response => {
                 // response.data.sellerUrl = '';
-                return Promise.resolve(response.data);
+                return Promise.resolve(response.data[0]);
             })
             .catch(e => {
                 return Promise.resolve(null);

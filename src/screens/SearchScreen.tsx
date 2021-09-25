@@ -21,8 +21,8 @@ export const SearchScreen = ({ navigation }: Props) => {
     //Esto lo pongo para proteger cuando hay celulares con Notch (Como el mío, de Guti)
     const { top, bottom } = useSafeAreaInsets();
 
-    function goToDetail(id: string): void {
-        navigation.navigate('ProductDetailScreen', { id });
+    function goToDetail(id: string, sellerKey: string): void {
+        navigation.navigate('ProductDetailScreen', { id, sellerKey });
     }
 
     function onAddItemTocart(item: SimpleProduct) {
