@@ -62,7 +62,7 @@ export class GraphQlAPI {
     client;
     constructor() {
         this.client = new ApolloClient({
-            uri: 'https://oldwave-graphql.herokuapp.com/graphql',
+            uri: 'http://54.146.30.122:3200/graphql',
             cache: new InMemoryCache()
         });
     }

@@ -7,7 +7,7 @@ export class FlaskApi {
     axiosIntance: AxiosInstance;
 
     constructor() {
-        this.baseUrl = 'https://proyectoflaskoldwave.herokuapp.com/api';
+        this.baseUrl = 'http://54.183.179.149:8080/api';
         this.axiosIntance = axios.create({ baseURL: this.baseUrl });
     }
 
