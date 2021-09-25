@@ -1,25 +1,25 @@
 import axios, { AxiosInstance } from 'axios';
 import { APIKeysEnum } from './ApiEnums';
 
-export class FastApi {
+export class FlaskApi {
 
     baseUrl: string;
     axiosIntance: AxiosInstance;
 
     constructor() {
-        this.baseUrl = 'http://3.143.212.203/api/v1';
+        this.baseUrl = 'https://proyectoflaskoldwave.herokuapp.com/api';
         this.axiosIntance = axios.create({ baseURL: this.baseUrl });
     }
 
     searchByKeyword(query: string) {
         return this.axiosIntance.get<any>(`/search?q=${query}`)
             .then(r => {
-                console.log('%%%', r)
+                console.log('%%%%%%',r)
                 let items = r.data.items;
                 const sellerName = r.data.seller.name;
                 items = items.map((item: any) => {
                     item.id = `${sellerName}-${item.id}`;
-                    item.sellerKey = APIKeysEnum.FAST;
+                    item.sellerKey = APIKeysEnum.FLASK;
                     return item;
                 });
 
@@ -35,7 +35,7 @@ export class FastApi {
         const [sellerName, realId] = productId.split('-');
         console.log('##############');
 
-        return this.axiosIntance.get<any>(`/items/${realId}`)
+        return this.axiosIntance.get<any>(`/item/${realId}`)
             .then(response => {
                 // response.data.sellerUrl = '';
                 return Promise.resolve(response.data);
