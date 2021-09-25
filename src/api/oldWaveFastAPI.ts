@@ -7,7 +7,7 @@ export class FastApi {
     axiosIntance: AxiosInstance;
 
     constructor() {
-        this.baseUrl = 'http://3.143.212.203/api/v1';
+        this.baseUrl = 'https://d1eylshvb8atwe.cloudfront.net/api/v1';
         this.axiosIntance = axios.create({ baseURL: this.baseUrl });
     }
 
