@@ -68,7 +68,8 @@ export const ProductCard = ({ product, onClick, onAddToCart }: Props) => {
                                             <Icon name='star' type='ionicon' color='#F1AE08' size={15} />
                                         </View>
                                     </View>
-                                    <Text style={styles.name}> {product.name} </Text>
+                                    <Text style={styles.name} numberOfLines={ 2 }
+                adjustsFontSizeToFit > {product.name} </Text>
                                     <Text style={styles.priceAndBrand}> {product.brand} </Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <View style={{ ...styles.fabCounter, backgroundColor: colorSeller }}>
