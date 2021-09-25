@@ -8,7 +8,7 @@ interface ProductDetails {
 }
 
 
-export const useProductDetail = (productId: string) => {
+export const useProductDetail = (productId: string, sellerKey: string) => {
 
     const { loadProductById } = useContext(ProductsContext);
 
@@ -21,7 +21,7 @@ export const useProductDetail = (productId: string) => {
     const getProductDetail = async () => {
         // Acá se recuperaría de la api con el id del producto
 
-        const product = await loadProductById(productId);
+        const product = await loadProductById(productId, sellerKey);
 
         setState({
             isLoading: false,

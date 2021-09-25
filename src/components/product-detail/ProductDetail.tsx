@@ -24,8 +24,6 @@ export const ProductDetail = ({ productFull, onAddToCart, goToShoppingCart }: Pr
     const navigation = useNavigation();
     const [activeSlide, setActiveSlide] = useState(0);
 
-
-
     return (
         <>
             <ScrollView>
@@ -59,7 +57,7 @@ export const ProductDetail = ({ productFull, onAddToCart, goToShoppingCart }: Pr
                         <Icon name='star' type='ionicon' color='#F1AE08' size={15} />
                     </View>
                 </View>
-                <ItemDetail title={'MARCA'} content={'Apple'} />
+                <ItemDetail title={'MARCA'} content={productFull.brand || ''} />
                 <ItemDetail title={'DESCRIPCION'} content={productFull.description} />
                 <ItemDetail title={'VENDEDOR'} content={''} reseller={productFull.seller} />
             </ScrollView>

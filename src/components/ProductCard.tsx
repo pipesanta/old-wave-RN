@@ -10,7 +10,7 @@ const windowWidth = Dimensions.get('window').width;
 
 interface Props {
     product: any,
-    onClick: (id: string) => void;
+    onClick: (id: string, sellerKey: string) => void;
     onAddToCart?: () => void;
 }
 
@@ -56,7 +56,7 @@ export const ProductCard = ({ product, onClick, onAddToCart }: Props) => {
                         <View style={styles.detailContainer}>
 
                             <View style={styles.detailContent} >
-                                <TouchableOpacity onPress={onClick.bind(this, product.id || '')} style={styles.detailButtonContent}>
+                                <TouchableOpacity onPress={onClick.bind(this, product.id, product.sellerKey)} style={styles.detailButtonContent}>
                                     <View style={{ flexDirection: "row", justifyContent: 'space-between', width: '100%' }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start' }}>
                                             <Icon name='location-outline' type='ionicon' color='#000' size={15} />
