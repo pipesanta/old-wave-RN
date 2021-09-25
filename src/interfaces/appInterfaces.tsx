@@ -55,6 +55,7 @@ export interface SimpleProduct {
     city?: City;
     price: number;
     rating?: number;
+    sellerKey: string;
 }
 
 export interface CompleteProduct {
