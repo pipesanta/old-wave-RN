@@ -1,6 +1,7 @@
 import { AxiosInstance } from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { oldWaveFastAPI, oldWaveFlask, oldWaveSpringBoot } from '../api/oldWaveAPI';
+import { FastApi } from '../api/oldWaveFastAPI';
 import { CompleteProduct, Product, SimpleProduct } from '../interfaces/appInterfaces';
 
 //Información que se va a exponer
@@ -16,24 +17,30 @@ export const ProductsProvider = ({ children }: any) => {
 
     const [products, setProducts] = useState<SimpleProduct[]>([]);
 
+    const [fastApiInstance] = useState(new FastApi());
+
     useEffect(() => {
-        loadProducts('apple');
+        loadProducts('');
     }, []);
 
+
     const loadProducts = async (q: string) => {
+        console.log('loadProducts..............');
+
 
         const [fast, spring, flask] = ['fast', 'springBoot', 'flask'];
 
-        const [fastResponse, springBootResponse, flaskResponse] = await Promise.all([
-            oldWaveFastAPI.get<SimpleProduct[]>(`/items?q=${q}`),
-            oldWaveSpringBoot.get<SimpleProduct[]>(`/items?q=${q}`),
-            oldWaveFlask.get<SimpleProduct[]>(`/items?q=${q}`)
+        const [fastResponse] = await Promise.all([
+            // oldWaveFastAPI.get<SimpleProduct[]>(`/items?q=${q}`),
+            fastApiInstance.searchByKeyword(q)
+            // oldWaveSpringBoot.get<SimpleProduct[]>(`/items?q=${q}`),
+            // oldWaveFlask.get<SimpleProduct[]>(`/items?q=${q}`)
         ]);
 
         const joinedResponses = [
-            ...fastResponse.data.map(i => ({ ...i, id: `${fast}-${i.id}` })),
-            ...springBootResponse.data.map(i => ({ ...i, id: `${spring}-${i.id}` })),
-            ...flaskResponse.data.map(i => ({ ...i, id: `${flask}-${i.id}` }))
+            ...fastResponse
+            // ...springBootResponse.data.map(i => ({ ...i, id: `${spring}-${i.id}` })),
+            // ...flaskResponse.data.map(i => ({ ...i, id: `${flask}-${i.id}` }))
         ];
 
         setProducts(joinedResponses);
@@ -41,22 +48,20 @@ export const ProductsProvider = ({ children }: any) => {
 
     const loadProductById = async (id: string, sellerKey?: string): Promise<CompleteProduct> => {
 
-        let apiRest: AxiosInstance;
+        let apiRest: FastApi //  || flasApi || ;
 
         switch (sellerKey) {
-            case 'FLASK':
-                apiRest = oldWaveFlask
+            case 'FastAPI':
+                apiRest = fastApiInstance
                 break;
 
             default:
-                apiRest = oldWaveFastAPI;
+                apiRest = fastApiInstance;
         }
 
-        const parsedId = id.split('-')[1];
+        const res = await apiRest.searchProductById(id);
 
-        const res = await apiRest.get<CompleteProduct>(`items/${parsedId}`);
-
-        return res.data;
+        return res;
     };
 
     return (
