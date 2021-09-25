@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { oldWaveFastAPI, oldWaveFlask, oldWaveSpringBoot } from '../api/oldWaveAPI';
 import { FastApi } from '../api/oldWaveFastAPI';
+import { FlaskApi } from '../api/oldWaveFlaskAPI';
 import { CompleteProduct, Product, SimpleProduct } from '../interfaces/appInterfaces';
 
 //Información que se va a exponer
@@ -18,6 +19,7 @@ export const ProductsProvider = ({ children }: any) => {
     const [products, setProducts] = useState<SimpleProduct[]>([]);
 
     const [fastApiInstance] = useState(new FastApi());
+    const [flaskApiInstance] = useState(new FlaskApi());
 
     useEffect(() => {
         loadProducts('');
@@ -30,15 +32,17 @@ export const ProductsProvider = ({ children }: any) => {
 
         const [fast, spring, flask] = ['fast', 'springBoot', 'flask'];
 
-        const [fastResponse] = await Promise.all([
+        const [fastResponse, flaskResponse] = await Promise.all([
             // oldWaveFastAPI.get<SimpleProduct[]>(`/items?q=${q}`),
-            fastApiInstance.searchByKeyword(q)
+            fastApiInstance.searchByKeyword(q),
+            flaskApiInstance.searchByKeyword(q)
             // oldWaveSpringBoot.get<SimpleProduct[]>(`/items?q=${q}`),
             // oldWaveFlask.get<SimpleProduct[]>(`/items?q=${q}`)
         ]);
 
         const joinedResponses = [
-            ...fastResponse
+            ...fastResponse,
+            ...flaskResponse
             // ...springBootResponse.data.map(i => ({ ...i, id: `${spring}-${i.id}` })),
             // ...flaskResponse.data.map(i => ({ ...i, id: `${flask}-${i.id}` }))
         ];
