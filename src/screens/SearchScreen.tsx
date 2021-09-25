@@ -55,7 +55,8 @@ export const SearchScreen = ({ navigation }: Props) => {
                 marginBottom: 120,
                 alignItems: 'center'
             }}>
-                <FlatList
+
+                {products?.length > 0 && <FlatList
                     data={products}
                     keyExtractor={(p) => p.id}
                     numColumns={2}
@@ -76,7 +77,15 @@ export const SearchScreen = ({ navigation }: Props) => {
                     ItemSeparatorComponent={() => (
                         <View style={styles.itemSeparator} />
                     )}
-                />
+                />}
+
+
+                {products?.length === 0 && <View style={{ top: top + 10 }}>
+                    <Text style={{ color: 'blue', fontSize: 20, textAlign: 'center', justifyContent: 'center' }}>
+                        {'No hay productos para mostrar'}
+                    </Text>
+                </View>}
+
             </View>
         </View>
     )

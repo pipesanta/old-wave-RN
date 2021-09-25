@@ -77,6 +77,7 @@ export class GraphQlAPI {
             }
         })
             .then(response => {
+
                 const responseData = response?.data?.search || {};
                 const sellerName = APIKeysEnum.GRAPHQL;
 

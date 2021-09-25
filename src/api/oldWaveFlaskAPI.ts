@@ -14,13 +14,16 @@ export class FlaskApi {
     searchByKeyword(query: string) {
         return this.axiosIntance.get<any>(`/search?q=${query}`)
             .then(r => {
-                let responseObject = r.data[0];
+                let items = [];
+                let responseObject = r.data;
                 const sellerName = APIKeysEnum.FLASK;
-                const items = responseObject.items.map((item: any) => {
+                items = responseObject.items.map((item: any) => {
                     item.id = `${sellerName}-${item.id}`;
                     item.sellerKey = APIKeysEnum.FLASK;
                     return item;
                 });
+
+                items = items.filter((i: any) => Boolean(i.name.trim()))
 
                 return Promise.resolve(items);
             })
@@ -35,7 +38,7 @@ export class FlaskApi {
         return this.axiosIntance.get<any>(`/item/${realId}`)
             .then(response => {
                 // response.data.sellerUrl = '';
-                return Promise.resolve(response.data[0]);
+                return Promise.resolve(response.data);
             })
             .catch(e => {
                 return Promise.resolve(null);
