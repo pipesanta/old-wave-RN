@@ -30,22 +30,25 @@ export const ShoppingCartProvider = ({ children }: any) => {
 
     useEffect(() => {
         // load local storage
-        AsyncStorage.getItem(localStorageKeyForCartState).then(d => {
-            if (d) {
-                const newState: ShoppingCartState = JSON.parse(d);
-                dispatch({
-                    type: 'SetCartList',
-                    payload: { state: newState }
-                })
-            }
-        })
+        // AsyncStorage.getItem(localStorageKeyForCartState).then(d => {
+        //     if (d) {
+        //         const newState: ShoppingCartState = JSON.parse(d);
+        //         dispatch({
+        //             type: 'SetCartList',
+        //             payload: { state: newState }
+        //         })
+        //     }
+        // })
 
     }, []);
 
 
     useEffect(() => {
-        AsyncStorage.setItem(localStorageKeyForCartState, JSON.stringify(state))
-            .then(d => console.log('local storage actualizado'))
+        // if (state) {
+        //     AsyncStorage.setItem(localStorageKeyForCartState, JSON.stringify(state))
+        //         .then(d => console.log('local storage actualizado'))
+        // }
+
     }, [state])
 
 

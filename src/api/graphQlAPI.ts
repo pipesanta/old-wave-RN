@@ -3,10 +3,13 @@ import {
     InMemoryCache,
     ApolloProvider,
     useQuery,
-    gql
+    gql,
+    createHttpLink
 } from "@apollo/client";
 import { APIKeysEnum } from "./ApiEnums";
-
+// import 'cross-fetch/polyfill';
+// import fetch from 'isomorphic-fetch';
+import fetch from 'node-fetch';
 
 const SearchByKeywordQuery: any = gql`
     query searchQUERY($name: String){
@@ -59,10 +62,14 @@ const SearchItemById: any = gql`
 
 export class GraphQlAPI {
 
-    client;
+    client: any;
+
     constructor() {
         this.client = new ApolloClient({
-            uri: 'http://54.146.30.122:3200/graphql',
+            link: createHttpLink({
+                // fetch: fetch,
+                uri: 'http://54.146.30.122:3200/graphql',
+            }),
             cache: new InMemoryCache()
         });
     }
@@ -76,7 +83,7 @@ export class GraphQlAPI {
                 name: query,
             }
         })
-            .then(response => {
+            .then((response: any) => {
 
                 const responseData = response?.data?.search || {};
                 const sellerName = APIKeysEnum.GRAPHQL;
@@ -92,7 +99,7 @@ export class GraphQlAPI {
                 return Promise.resolve(items);
 
             })
-            .catch(e => {
+            .catch((e: any) => {
                 console.log(e);
                 return Promise.resolve([]);
             })
@@ -107,11 +114,11 @@ export class GraphQlAPI {
                 id: realId
             }
         })
-            .then(response => {
+            .then((response: any) => {
                 const responseData = response?.data?.item || {};
                 return Promise.resolve(responseData);
             })
-            .catch(e => {
+            .catch((e: any) => {
                 console.log(e);
                 return Promise.resolve(null);
             })
