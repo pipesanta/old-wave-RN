@@ -2,6 +2,9 @@
 module.exports = {
     testEnvironment: "jsdom",
     preset: "jest-expo",
+    setupFiles: [
+        "<rootDir>/src/jestSetup.js"
+    ],
     globals: {
         "ts-jest": {
             tsconfig: {

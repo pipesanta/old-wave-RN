@@ -10,7 +10,7 @@ interface Props {
 
 export const ItemDetail = ({ title, content, reseller }: Props) => {
     return (
-        <View style={{ marginHorizontal: 20, marginBottom: 15 }}>
+        <View testID="ItemDetail_view" style={{ marginHorizontal: 20, marginBottom: 15 }}>
 
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                 <View>
@@ -21,9 +21,11 @@ export const ItemDetail = ({ title, content, reseller }: Props) => {
             </View>
 
             {
-                reseller ?
-                    <ResellerCard reseller={reseller} /> :
-                    <Text style={{ fontSize: 16, color: '#5C5E64', paddingLeft: 10, marginBottom: 20, textAlign: "justify" }}>
+                reseller
+                    ?
+                    <ResellerCard reseller={reseller} />
+                    :
+                    <Text testID="reseller_text_id" key="123" style={{ fontSize: 16, color: '#5C5E64', paddingLeft: 10, marginBottom: 20, textAlign: "justify" }}>
                         {content}
                     </Text>
             }

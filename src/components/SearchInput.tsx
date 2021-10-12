@@ -25,10 +25,10 @@ export const SearchInput = ({ style, onValueChanges }: Props) => {
             ...styles.container,
             ...style as any
         }}>
-           
+
             <View style={styles.textBackground}>
-                <Icon name='search' color='#772CE8'/>
-                
+                <Icon name='search' color='#772CE8' />
+
                 <TextInput
                     placeholder="Buscar"
                     style={{
@@ -50,15 +50,15 @@ export const SearchInput = ({ style, onValueChanges }: Props) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#772CE8',
-        flex: 1, 
+        flex: 1,
         position: 'absolute',
         top: 60,
-        height: 69, 
+        height: 69,
         width: '100%',
         paddingHorizontal: 12
 
     },
-    
+
     textBackground: {
         backgroundColor: '#F3F1F3',
         borderRadius: 50,
@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5, 
-        top: 19, 
+        elevation: 5,
+        top: 19,
 
     },
     textInput: {
         flex: 1,
         fontSize: 18,
-  
-    }, 
-  
+
+    },
+
 });
