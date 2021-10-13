@@ -51,9 +51,6 @@ jobs:
       - checkout
       - restore-cache-and-install-dependencies
       - run:
-          name: Run ESLint
-          command: npm run lint
-      - run:
           name: Run unit tests
           command: npm run test
 
@@ -100,42 +97,42 @@ workflows:
   build-deploy:
     jobs:
       - unit_test
-      - approval:
-          type: approval
-          requires:
-            - unit_test
-      - publish_feature_to_expo:
-          context: app-name-staging
-          requires:
-            - approval
-          filters:
-            branches:
-              ignore: master
-      - publish_to_expo_staging:
-          context: app-name-staging
-          requires:
-            - unit_test
-          filters:
-            branches:
-              only: master
-      - build_binaries_staging:
-          context: app-name-staging
-          requires:
-            - approval
-          filters:
-            branches:
-              only: master
-      - publish_to_expo_production:
-          context: app-name-production
-          requires:
-            - unit_test
-          filters:
-            tags:
-              only: /^v.*/
-      - build_binaries_production:
-          context: app-name-production
-          requires:
-            - approval
-          filters:
-            tags:
-              only: /^v.*/
+      # - approval:
+      #     type: approval
+      #     requires:
+      #       - unit_test
+      # - publish_feature_to_expo:
+      #     context: app-name-staging
+      #     requires:
+      #       - approval
+      #     filters:
+      #       branches:
+      #         ignore: master
+      # - publish_to_expo_staging:
+      #     context: app-name-staging
+      #     requires:
+      #       - unit_test
+      #     filters:
+      #       branches:
+      #         only: master
+      # - build_binaries_staging:
+      #     context: app-name-staging
+      #     requires:
+      #       - approval
+      #     filters:
+      #       branches:
+      #         only: master
+      # - publish_to_expo_production:
+      #     context: app-name-production
+      #     requires:
+      #       - unit_test
+      #     filters:
+      #       tags:
+      #         only: /^v.*/
+      # - build_binaries_production:
+      #     context: app-name-production
+      #     requires:
+      #       - approval
+      #     filters:
+      #       tags:
+      #         only: /^v.*/
