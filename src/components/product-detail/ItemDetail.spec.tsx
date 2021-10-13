@@ -42,28 +42,28 @@ describe("<ItemDetail />", () => {
         expect(tree.toJSON()).toMatchSnapshot();
     });
 
-    it("<ItemDetail /> text content...", () => {
+    // it("<ItemDetail /> text content...", () => {
 
-        // console.log({
-        //     ROOT: tree.root
-        // });
+    // console.log({
+    //     ROOT: tree.root
+    // });
 
-        const mainView = tree.findAllByType({ testID: "reseller_text_id" });
+    // const mainView = tree.findAllByType({ testID: "reseller_text_id" });
 
-        console.log("-------------", {
-            children: mainView
-        });
+    // console.log("-------------", {
+    //     children: mainView
+    // });
 
-        // const resellerText = mainView.root.findByProps({ testID: 'reseller_text_id' }).props
+    // const resellerText = mainView.root.findByProps({ testID: 'reseller_text_id' }).props
 
-        // console.log({
-        //     resellerText
-        // });
+    // console.log({
+    //     resellerText
+    // });
 
 
-        // console.log(mainView.children);
-        // expect(resellerText.children).toEqual("contenido del eso");
-    });
+    // console.log(mainView.children);
+    // expect(resellerText.children).toEqual("contenido del eso");
+    // });
 
 
 })
