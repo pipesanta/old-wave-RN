@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ItemDetail /> snapshot ---------- 1`] = `
+<View
+  style={
+    Object {
+      "marginBottom": 15,
+      "marginHorizontal": 20,
+    }
+  }
+  testID="ItemDetail_view"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "#5C5E64",
+            "fontSize": 20,
+            "fontWeight": "normal",
+            "opacity": 0.5,
+          }
+        }
+      >
+        titulo
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "width": 10,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#5C5E64",
+          "flex": 1,
+          "height": 1,
+          "opacity": 0.5,
+          "padding": "auto",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "white",
+        "borderRadius": 10,
+        "elevation": 9,
+        "flexDirection": "row",
+        "height": 50,
+        "marginLeft": 50,
+        "marginRight": 50,
+        "paddingRight": 15,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 10,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 7,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "flex": 1,
+          "justifyContent": "center",
+          "marginLeft": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "fontWeight": "bold",
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

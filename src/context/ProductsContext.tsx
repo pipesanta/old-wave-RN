@@ -2,7 +2,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { FastApi } from '../api/oldWaveFastAPI';
 import { FlaskApi } from '../api/oldWaveFlaskAPI';
-import { GraphQlAPI } from '../api/graphQlAPI';
+// import { GraphQlAPI } from '../api/graphQlAPI';
 import { CompleteProduct, Product, SimpleProduct } from '../interfaces/appInterfaces';
 import { APIKeysEnum } from '../api/ApiEnums';
 
@@ -21,7 +21,7 @@ export const ProductsProvider = ({ children }: any) => {
 
     const [fastApiInstance] = useState(new FastApi());
     const [flaskApiInstance] = useState(new FlaskApi());
-    const [graphQlApiInstance] = useState(new GraphQlAPI());
+    // const [graphQlApiInstance] = useState(new GraphQlAPI());
 
 
     useEffect(() => {
@@ -31,10 +31,12 @@ export const ProductsProvider = ({ children }: any) => {
 
     const loadProducts = async (q: string) => {
 
-        const [fastResponse, flaskResponse, graphqlResponse] = await Promise.all([
+        const [fastResponse, flaskResponse,
+            // graphqlResponse
+        ] = await Promise.all([
             fastApiInstance.searchByKeyword(q),
             flaskApiInstance.searchByKeyword(q),
-            graphQlApiInstance.searchByKeyword(q)
+            // graphQlApiInstance.searchByKeyword(q)
         ]);
 
 
@@ -42,7 +44,7 @@ export const ProductsProvider = ({ children }: any) => {
         const joinedResponses = [
             ...fastResponse,
             ...flaskResponse,
-            ...graphqlResponse
+            // ...graphqlResponse
         ];
 
         setProducts(joinedResponses);
@@ -50,7 +52,7 @@ export const ProductsProvider = ({ children }: any) => {
 
     const loadProductById = async (id: string, sellerKey: string): Promise<CompleteProduct> => {
 
-        let apiRest: FastApi | FlaskApi | GraphQlAPI;
+        let apiRest: FastApi | FlaskApi // | GraphQlAPI;
 
         switch (sellerKey) {
             case APIKeysEnum.FAST:
@@ -59,9 +61,9 @@ export const ProductsProvider = ({ children }: any) => {
             case APIKeysEnum.FLASK:
                 apiRest = flaskApiInstance;
                 break;
-            case APIKeysEnum.GRAPHQL:
-                apiRest = graphQlApiInstance;
-                break;
+            // case APIKeysEnum.GRAPHQL:
+            //     apiRest = graphQlApiInstance;
+            //     break;
 
             default:
                 apiRest = fastApiInstance;

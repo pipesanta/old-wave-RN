@@ -1,28 +1,26 @@
 import { useNavigation } from '@react-navigation/native';
-import { StackScreenProps } from '@react-navigation/stack';
 import React, { useContext } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ShoppingCartContext } from '../context/CartContext';
-import { ProductsStackParams } from '../navigator/ProductsNavigator';
 
 interface Props {
     goToShoppingCart: () => void;
 }
 
-export const Header = ({goToShoppingCart}: Props) => {
+export const Header = ({ goToShoppingCart }: Props) => {
     const navigation = useNavigation();
 
     const {
         totalProducts
     } = useContext(ShoppingCartContext);
 
-    
+
 
     return (
         <View style={styles.header}>
-            <View style={{ flex: 1, flexDirection:"row", alignItems:'center', marginLeft:20 }}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: 'center', marginLeft: 20 }}>
 
                 <View style={styles.menu}>
                     <Icon name='menu' color='#772CE8' size={35} />
@@ -36,29 +34,29 @@ export const Header = ({goToShoppingCart}: Props) => {
                     />
                 </View>
             </View>
-            <View style={{ flex: 1, flexDirection:"row", alignItems:'center', marginLeft:20, justifyContent:'flex-end' }}>
-            <View style={styles.loginIcon}>
-                <TouchableOpacity >
-                    <Image
-                        source={require('../../assets/logo/login-icon.png')}
-                    />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.carIcon}>
-                <TouchableOpacity onPress={goToShoppingCart}>
-                    <View style={styles.fabCounter}>
-                        <Text style={styles.textFabCounter}>
-                            {totalProducts}
-                        </Text>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: 'center', marginLeft: 20, justifyContent: 'flex-end' }}>
+                <View style={styles.loginIcon}>
+                    <TouchableOpacity >
+                        <Image
+                            source={require('../../assets/logo/login-icon.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.carIcon}>
+                    <TouchableOpacity onPress={goToShoppingCart}>
+                        <View style={styles.fabCounter}>
+                            <Text style={styles.textFabCounter}>
+                                {totalProducts}
+                            </Text>
 
-                    </View>
-                    <Image
+                        </View>
+                        <Image
 
-                        source={require('../../assets/logo/carrito-icon.png')}
-                    />
-                </TouchableOpacity>
+                            source={require('../../assets/logo/carrito-icon.png')}
+                        />
+                    </TouchableOpacity>
 
-            </View>
+                </View>
             </View>
         </View>
     )
@@ -78,8 +76,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         opacity: 1,
-        marginLeft:10,
-        padding:8
+        marginLeft: 10,
+        padding: 8
     },
     oldwave: {
         height: 40,
@@ -92,8 +90,8 @@ const styles = StyleSheet.create({
     },
     carIcon: {
         backgroundColor: 'white',
-        margin:10,
-        marginBottom:15
+        margin: 10,
+        marginBottom: 15
     },
     fabCounter: {
         position: 'absolute',

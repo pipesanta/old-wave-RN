@@ -16,7 +16,7 @@ commands:
           key: v2-deps
       - run:
           name: Install Dependencies
-          command: npm ci
+          command: npm install
       - save_cache:
           key: v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:

@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import currencyFormatter from 'currency-formatter';
 import { Icon } from 'react-native-elements';
-import { SimpleProduct } from '../interfaces/appInterfaces';
 import { APIKeysEnum } from '../api/ApiEnums';
 
 const windowWidth = Dimensions.get('window').width;
@@ -17,19 +16,24 @@ interface Props {
 export const ProductCard = ({ product, onClick, onAddToCart }: Props) => {
     let colorSeller = '#32D1F7';
     let textSeller = '';
+
     switch (product.sellerKey) {
+
         case APIKeysEnum.FAST:
             colorSeller = '#772CE8'
             textSeller = 'F'
             break;
+
         case APIKeysEnum.SPRING:
             colorSeller = '#7E41D8'
             textSeller = 'S'
             break;
+
         case APIKeysEnum.GRAPHQL:
             colorSeller = '#32D1F7'
             textSeller = 'G'
             break;
+
         case APIKeysEnum.FLASK:
             colorSeller = '#3B3B3B'
             textSeller = 'k'
@@ -68,8 +72,8 @@ export const ProductCard = ({ product, onClick, onAddToCart }: Props) => {
                                             <Icon name='star' type='ionicon' color='#F1AE08' size={15} />
                                         </View>
                                     </View>
-                                    <Text style={styles.name} numberOfLines={ 2 }
-                adjustsFontSizeToFit > {product.name} </Text>
+                                    <Text style={styles.name} numberOfLines={2}
+                                        adjustsFontSizeToFit > {product.name} </Text>
                                     <Text style={styles.priceAndBrand}> {product.brand} </Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <View style={{ ...styles.fabCounter, backgroundColor: colorSeller }}>
@@ -83,7 +87,7 @@ export const ProductCard = ({ product, onClick, onAddToCart }: Props) => {
 
                                 </TouchableOpacity>
                             </View>
-                            <TouchableOpacity style={styles.addCartButton} onPress={onAddToCart}>
+                            <TouchableOpacity testID={"add_to_cart_text"} style={styles.addCartButton} onPress={onAddToCart}>
                                 <Text style={styles.textBuyButton}>
                                     Agregar al carrito
                                 </Text>
