@@ -4,6 +4,9 @@ export const useDebouncedValue = (input: string = '', time: number = 500) => {
 
     const [debouncedValue, setDebouncedValue] = useState(input);
 
+
+    console.log('Hola');
+    
     useEffect(() => {
 
         const timeout = setTimeout(() => {
